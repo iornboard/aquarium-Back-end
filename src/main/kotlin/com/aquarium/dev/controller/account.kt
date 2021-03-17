@@ -1,18 +1,45 @@
 package com.aquarium.dev.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import com.aquarium.dev.domain.entity.User
+import com.aquarium.dev.domain.repository.UserRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/api")
+internal class account (repository: UserRepository) {
 
-public class account {
+    @Autowired
+    private val repository: UserRepository
 
-
-    @GetMapping("/login")
-    public fun login() : String {
-        return "account/"
+    @GetMapping("/foo")
+    fun foo(): String {
+        return "it is a foo"
     }
+
+    @GetMapping("/user")
+    fun all(): List<User?> {
+        return repository.findAll()
+    }
+
+    // end::get-aggregate-root[]
+    @PostMapping("/sign-up")
+    fun signUp (@RequestBody newUser: User) : String {
+        repository.save(newUser)
+        return "redirect:/api/login"
+    }
+
+
+//    // end::get-aggregate-root[]
+//    @PostMapping("/sign-up")
+//    fun signUp (@RequestBody newUser: User): User {
+//        return repository.save(newUser)
+//    }
+
+    init {
+        this.repository = repository
+    }
+
+
 }
