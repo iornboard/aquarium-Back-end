@@ -29,6 +29,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.security:spring-security-test")
     implementation("io.jsonwebtoken:jjwt:0.9.0") // 새로 추가한 것
     compileOnly ("com.fasterxml.jackson.core:jackson-core:2.6.3") // jackson
     compileOnly ("com.fasterxml.jackson.core:jackson-annotations:2.6.3") // jackson
