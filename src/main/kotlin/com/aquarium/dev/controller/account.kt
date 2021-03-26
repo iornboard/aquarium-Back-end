@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 internal class account (repository: UserRepository) {
 
     @Autowired
-    private val repository: UserRepository
+    private val userRpository: UserRepository
 
     @GetMapping("/foo")
     fun foo(): String {
@@ -20,13 +20,13 @@ internal class account (repository: UserRepository) {
 
     @GetMapping("/user")
     fun all(): List<User?> {
-        return repository.findAll()
+        return userRpository.findAll()
     }
 
     // end::get-aggregate-root[]
     @PostMapping("/sign-up")
     fun signUp (@RequestBody newUser: User) : String {
-        repository.save(newUser)
+        userRpository.save(newUser)
         return "redirect:/api/login"
     }
 
@@ -38,7 +38,7 @@ internal class account (repository: UserRepository) {
 //    }
 
     init {
-        this.repository = repository
+        this.userRpository = repository
     }
 
 

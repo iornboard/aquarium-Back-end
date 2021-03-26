@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 
 @Controller
-internal class sample(userRpository: UserRepository) {
+internal class Sample(userRpository: UserRepository) {
 
     @Autowired
     private val userRpository: UserRepository
@@ -41,13 +41,14 @@ internal class sample(userRpository: UserRepository) {
         return "sample"
     }
 
+
     @PostMapping("/join")
     fun sample( user : User): String? {
         println(user)
-        user.user_role = "USER_ROLE"
-        val rawPassword : String ?= user.user_password
+        user.userRole = "USER_ROLE"
+        val rawPassword : String ?= user.userPassword
         val encPassword = bCryptPasswordEncoder!!.encode(rawPassword)
-        user.user_password = encPassword
+        user.userPassword = encPassword
         userRpository.save(user)
 
         return "redirect:/sample"
