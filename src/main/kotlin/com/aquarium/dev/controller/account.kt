@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-internal class account (repository: UserRepository) {
+internal class account (userRepository: UserRepository) {
 
     @Autowired
-    private val userRpository: UserRepository
+    private val userRepository: UserRepository
 
     @GetMapping("/foo")
     fun foo(): String {
@@ -20,13 +20,13 @@ internal class account (repository: UserRepository) {
 
     @GetMapping("/user")
     fun all(): List<User?> {
-        return userRpository.findAll()
+        return userRepository.findAll()
     }
 
     // end::get-aggregate-root[]
     @PostMapping("/sign-up")
     fun signUp (@RequestBody newUser: User) : String {
-        userRpository.save(newUser)
+        userRepository.save(newUser)
         return "redirect:/api/login"
     }
 
@@ -38,7 +38,7 @@ internal class account (repository: UserRepository) {
 //    }
 
     init {
-        this.userRpository = repository
+        this.userRepository = userRepository
     }
 
 

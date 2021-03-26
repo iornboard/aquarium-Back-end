@@ -10,16 +10,14 @@ import java.util.ArrayList
 // Security Session => Authentication   => UserDetails( == principalDetails)
 // 출처 : https://github.com/codingspecialist/Sringboot-Security-Basic-V1/blob/master/java/com/cos/securityex01/config/auth/PrincipalDetails.java
 
-class PrincipalDetails(user: User) : UserDetails {
-    private val user: User
 
-
+class PrincipalDetails(private val user: User) : UserDetails {
     override fun getPassword(): String {
-        return user.userPassword.toString()
+        return user.password.toString()
     }
 
     override fun getUsername(): String {
-        return user.userName.toString()
+        return user.username.toString()
     }
 
     override fun isAccountNonExpired(): Boolean {
@@ -38,13 +36,9 @@ class PrincipalDetails(user: User) : UserDetails {
         return true
     }
 
-    override fun getAuthorities(): Collection<GrantedAuthority>? {
+    override fun getAuthorities(): Collection<GrantedAuthority> {
         val collet: MutableCollection<GrantedAuthority> = ArrayList()
-        collet.add(GrantedAuthority { user.userRole })
+        collet.add(GrantedAuthority { user.userRole.toString() })
         return collet
-    }
-
-    init {
-        this.user = user
     }
 }
