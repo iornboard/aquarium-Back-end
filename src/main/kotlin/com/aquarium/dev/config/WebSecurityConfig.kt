@@ -1,5 +1,6 @@
 package com.aquarium.dev.config
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
@@ -7,12 +8,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import com.aquarium.dev.config.auth.oauth.PrincipalOauth2UserService
+
+
+
 
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true )  // @secured 어노테이션 활성화 시킴 -> 특정 메서드에 간단히 걸 수 있는 인가 설정 , ( @PreAuthorize , @PostAuthorize 등등이 있다.)
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
+
+    @Autowired
+    private val principalOauth2UserService: PrincipalOauth2UserService? = null
+
 
     // 매서드의 리턴되는 오브젝트는 IOC로 등록되는 용도  (비밀번호 암호화 인코더)
     @Bean
@@ -33,8 +42,10 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                     .defaultSuccessUrl("/")
                     .permitAll()
                     .and()
-                .logout()
-                    .permitAll()
+                    .oauth2Login()  // 아래부터 구글 로그인 로직
+                    .loginPage("/loginForm")
+                    .userInfoEndpoint()
+                    .userService(principalOauth2UserService)
 
     }
 

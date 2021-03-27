@@ -19,5 +19,10 @@ data class User(
     var userNickname : String? = null,
     var userRole : String? = null,
     var createdAt : LocalDateTime? =null,
-    var updatedAt : LocalDateTime? =null
+    var updatedAt : LocalDateTime? =null,
+
+    var provider : String? = null,  // 소셜 회원가입 정보 -> google, naver등
+    var providerId : String? = null  // 소셜 회원가입 ID(숫자로 되어 있는 것)
+
+
 )
