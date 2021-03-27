@@ -27,4 +27,6 @@ data class User(
     var providerId : String? = null  // 소셜 회원가입 ID(숫자로 되어 있는 것)
 
 
+
+
 )
