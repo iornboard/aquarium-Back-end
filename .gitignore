@@ -5,8 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### API code ###
-.application-oauth.properties
+
 
 ### STS ###
 .apt_generated
@@ -38,3 +37,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### API code ###
+/src/main/resources/application-oauth.properties
