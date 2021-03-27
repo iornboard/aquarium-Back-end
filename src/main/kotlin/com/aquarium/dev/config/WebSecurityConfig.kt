@@ -22,7 +22,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private val principalOauth2UserService: PrincipalOauth2UserService? = null
 
-
     // 매서드의 리턴되는 오브젝트는 IOC로 등록되는 용도  (비밀번호 암호화 인코더)
     @Bean
     open fun encodePwd(): BCryptPasswordEncoder? {
@@ -33,7 +32,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/home","/sample","/join","/login").permitAll()
+                    .antMatchers("/", "/home","/sample","/join","/login","/logout").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
