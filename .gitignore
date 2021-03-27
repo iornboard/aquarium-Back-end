@@ -6,8 +6,7 @@ build/
 !**/src/test/**/build/
 
 ### API code ###
-application-oauth.properties
-
+.application-oauth.properties
 
 ### STS ###
 .apt_generated
