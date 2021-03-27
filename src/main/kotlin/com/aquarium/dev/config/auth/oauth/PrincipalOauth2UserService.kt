@@ -34,48 +34,45 @@ class PrincipalOauth2UserService : DefaultOAuth2UserService() {
 
         var oAuth2UserInfo: OAuth2UserInfo? = null  // oAuth2UserInfo == Oauth2로 받아온 각 플팻폼의 유저 프로파일
 
-        if(userRequest.clientRegistration.registrationId.equals("google")){
+        if (userRequest.clientRegistration.registrationId.equals("google")) {
             println("구글 로그인 요청")
-            oAuth2UserInfo =  GoogleUserInfo(oAuth2User.attributes)
-        }else if(userRequest.clientRegistration.registrationId.equals("facebook")){
+            oAuth2UserInfo = GoogleUserInfo(oAuth2User.attributes)
+        } else if (userRequest.clientRegistration.registrationId.equals("facebook")) {
             println("페이스북 로그인 요청")
-            oAuth2UserInfo =  FacebookUserInfo(oAuth2User.attributes)
-        }else if(userRequest.clientRegistration.registrationId.equals("naver")){
+            oAuth2UserInfo = FacebookUserInfo(oAuth2User.attributes)
+        } else if (userRequest.clientRegistration.registrationId.equals("naver")) {
             println("네이버 로그인 요청")
             oAuth2UserInfo = NaverUserInfo(oAuth2User.attributes["response"] as Map<String, Any>)
-        }else{
+        } else {
             println("지원하지 않은 로그인 형식입니다.")
         }
 
 
         // 아래부터는 아직 이해하지못해서 급한대로 코드를 그냥 복붙해버림
         // 추후에 공부하고 수정해야 함
-        val userOptional: Optional<User?>? =
-            userRepository!!.findByProviderAndProviderId(oAuth2UserInfo!!.provider, oAuth2UserInfo.providerId)
+//        val userOptional: Optional<User?>? =
+//            userRepository!!.findByProviderAndProviderId(oAuth2UserInfo!!.provider, oAuth2UserInfo.providerId)
+//
+//        val user: User
+//        if (userOptional!!.isPresent()) {
+//            user = userOptional.get()
+//            // user가 존재하면 update 해주기
+//            user.userEmail = oAuth2UserInfo.email
+//            userRepository.save(user)
+//        } else {
+//            // user의 패스워드가 null이기 때문에 OAuth 유저는 일반적인 로그인을 할 수 없음.
+//            user = User.builder()
+//                .username(oAuth2UserInfo.provider + "_" + oAuth2UserInfo.providerId)
+//                .email(oAuth2UserInfo.email)
+//                .role("ROLE_USER")
+//                .provider(oAuth2UserInfo.provider)
+//                .providerId(oAuth2UserInfo.providerId)
+//                .build()
+//            userRepository.save(user)
+//        }
+//
+       return super.loadUser(userRequest)
 
-        val user: User
-        if (userOptional!!.isPresent()) {
-            user = userOptional.get()
-            // user가 존재하면 update 해주기
-            user.userEmail = oAuth2UserInfo.email
-            userRepository.save(user)
-        } else {
-            // user의 패스워드가 null이기 때문에 OAuth 유저는 일반적인 로그인을 할 수 없음.
-            user = User.builder()
-                .username(oAuth2UserInfo.provider + "_" + oAuth2UserInfo.providerId)
-                .email(oAuth2UserInfo.email)
-                .role("ROLE_USER")
-                .provider(oAuth2UserInfo.provider)
-                .providerId(oAuth2UserInfo.providerId)
-                .build()
-            userRepository.save(user)
-        }
-
-        return PrincipalDetails(user, oAuth2User.attributes)
     }
-
-
-
-
 
 }

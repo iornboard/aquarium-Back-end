@@ -5,6 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### API code ###
+application-oauth.properties
+
+
 ### STS ###
 .apt_generated
 .classpath
@@ -35,7 +39,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-
-### properties ###
-application.properties
