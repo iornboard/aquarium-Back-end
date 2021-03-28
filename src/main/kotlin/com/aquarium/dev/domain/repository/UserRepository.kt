@@ -9,5 +9,5 @@ import java.util.*
 interface UserRepository : JpaRepository<User?, Int?> {
     open fun findByUsername(username: String?): User? // JPA quary methed 문법을 기준으로 만들 것 (메서드 이름은 변수를 따라갈 것)
 
-    fun findByProviderAndProviderId(provider: String?, providerId: String?): Optional<User?>?
+
 }

@@ -13,8 +13,9 @@ import com.aquarium.dev.domain.repository.UserRepository
 import com.aquarium.dev.config.auth.oauth.provider.OAuth2UserInfo
 import com.aquarium.dev.domain.entity.User
 import com.aquarium.dev.config.auth.PrincipalDetails
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
-import java.util.*
+
 
 
 // 출처 : https://github.com/codingspecialist/Springboot-Security-OAuth2.0-V2/blob/master/src/main/java/com/cos/securityex01/config/oauth/PrincipalOauth2UserService.java
@@ -25,6 +26,9 @@ class PrincipalOauth2UserService : DefaultOAuth2UserService() {
 
     @Autowired
     private val userRepository: UserRepository? = null
+
+    @Autowired
+    private val bCryptPasswordEncoder : BCryptPasswordEncoder? = null
 
 
     @Throws(OAuth2AuthenticationException::class)
@@ -47,31 +51,38 @@ class PrincipalOauth2UserService : DefaultOAuth2UserService() {
             println("지원하지 않은 로그인 형식입니다.")
         }
 
-
         // 아래부터는 아직 이해하지못해서 급한대로 코드를 그냥 복붙해버림
         // 추후에 공부하고 수정해야 함
-//        val userOptional: Optional<User?>? =
-//            userRepository!!.findByProviderAndProviderId(oAuth2UserInfo!!.provider, oAuth2UserInfo.providerId)
-//
-//        val user: User
-//        if (userOptional!!.isPresent()) {
-//            user = userOptional.get()
-//            // user가 존재하면 update 해주기
-//            user.userEmail = oAuth2UserInfo.email
-//            userRepository.save(user)
-//        } else {
-//            // user의 패스워드가 null이기 때문에 OAuth 유저는 일반적인 로그인을 할 수 없음.
-//            user = User.builder()
-//                .username(oAuth2UserInfo.provider + "_" + oAuth2UserInfo.providerId)
-//                .email(oAuth2UserInfo.email)
-//                .role("ROLE_USER")
-//                .provider(oAuth2UserInfo.provider)
-//                .providerId(oAuth2UserInfo.providerId)
-//                .build()
-//            userRepository.save(user)
-//        }
-//
-       return super.loadUser(userRequest)
+
+        val provider : String = userRequest.clientRegistration.clientId
+        val providerId : String = oAuth2User.attributes["sub"].toString()
+        val username : String = provider + "_" + providerId
+
+
+
+        val userEntity : User? = userRepository?.findByUsername(username)
+
+        // DB에 정보가 없는 경우
+
+        var user = User()  // 이거 더 좋은 방법이 있을 것 같은데.....
+
+        println(userEntity)
+
+        //!! devlog 21.03.28  여기 부분에서 항상 null이 뜨는 문제가 발생 수정할 것 !!
+        if (userEntity == null) {
+
+            user.provider = oAuth2UserInfo?.provider
+            user.providerId = oAuth2UserInfo?.providerId
+            user.username = user.provider + "_" + user.providerId
+            user.userEmail = oAuth2UserInfo?.email
+            user.userRole = "ROLE_USER"
+            //user.password = bCryptPasswordEncoder?.encode()   // !! devlog 21.03.28 비밀번호 처리 방법을 고안할 것 !!
+
+            userRepository!!.save(user)
+        }
+
+
+        return PrincipalDetails(user, oAuth2User.attributes)
 
     }
 

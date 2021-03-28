@@ -11,9 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import com.aquarium.dev.config.auth.oauth.PrincipalOauth2UserService
 
 
-
-
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true )  // @secured 어노테이션 활성화 시킴 -> 특정 메서드에 간단히 걸 수 있는 인가 설정 , ( @PreAuthorize , @PostAuthorize 등등이 있다.)
@@ -24,7 +21,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     // 매서드의 리턴되는 오브젝트는 IOC로 등록되는 용도  (비밀번호 암호화 인코더)
     @Bean
-    open fun encodePwd(): BCryptPasswordEncoder? {
+    open fun encodePwd(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
     }
 
