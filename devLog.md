@@ -13,3 +13,9 @@
         -> [PrincipalOauth2UserService]
             1) DB내용을 확인하고 중복된 계정이 있으면 막아햐 하는데, 이가 작동하지 않음 따라서 중복되어 계정이 생성됨
             2) Oauth 로그인에서 provider는 PW를 주지않기 때문에 이를 어떻게 할지 정해야 함
+
+
+남현수 - 21.03.29
+
+    1. jwt 구현 이전에 사용자 필터를 구현 할 수있도록 필터 부분을 추가함
+    2. swagger를 추가함  -> [ http://localhost:8080/swagger-ui.html ]
