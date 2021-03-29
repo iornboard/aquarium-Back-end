@@ -56,7 +56,7 @@ class PrincipalOauth2UserService : DefaultOAuth2UserService() {
         val userEntity : User? = userRepository?.findByUsername(username)
 
         var user = User()  // 이거 더 좋은 방법이 있을 것 같은데.....
-        if (userEntity == null) {
+        if (userEntity == null) { // DB에서 내용이 없을때 새로 생성
 
             user.provider = oAuth2UserInfo?.provider
             user.providerId = oAuth2UserInfo?.providerId
@@ -66,7 +66,7 @@ class PrincipalOauth2UserService : DefaultOAuth2UserService() {
             user.password = bCryptPasswordEncoder?.encode(user.providerId)   // !! devlog 21.03.28 비밀번호 처리 방법을 고안할 것 !!
 
             userRepository!!.save(user)
-        }else{
+        }else{  // DB에서 내용이 있으면 검증만
             user = userEntity
         }
 

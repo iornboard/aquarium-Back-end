@@ -1,14 +1,12 @@
 package com.aquarium.dev.domain.entity
 
 
-import lombok.Builder
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-@Builder
 @Entity
 data class User(
 

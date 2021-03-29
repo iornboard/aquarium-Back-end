@@ -32,11 +32,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.security:spring-security-test")
-    implementation("io.jsonwebtoken:jjwt:0.9.0") // 새로 추가한 것
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    compileOnly ("com.fasterxml.jackson.core:jackson-core:2.6.3") // jackson
-    compileOnly ("com.fasterxml.jackson.core:jackson-annotations:2.6.3") // jackson
-    compileOnly ("com.fasterxml.jackson.core:jackson-databind:2.6.3") // jackson
+    implementation("com.auth0:java-jwt:3.8.3")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("mysql:mysql-connector-java")
     annotationProcessor("org.projectlombok:lombok")

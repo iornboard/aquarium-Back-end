@@ -19,5 +19,10 @@
     <p>Click <a th:href="@{/oauth2/authorization/google}">here</a> login to google </p>
     <p>Click <a th:href="@{/oauth2/authorization/facebook}">here</a> login to facebook </p>
     <p>Click <a th:href="@{/oauth2/authorization/naver}">here</a> login to naver </p>
+
+<form th:action="@{/api/token}" method="post">
+    <div><input type="submit" value="회원가입"/></div>
+</form>
+
 </body>
 </html>
