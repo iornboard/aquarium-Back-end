@@ -53,7 +53,7 @@ internal class Sample(userRepository: UserRepository) {
     }
 
     @PostMapping("/join")
-    fun sample( user : User): String? {
+    fun sample( user : User ): String? {
         println(user)
         user.userRole = "USER_ROLE"
         val rawPassword : String? = user.password

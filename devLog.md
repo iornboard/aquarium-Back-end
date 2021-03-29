@@ -19,3 +19,4 @@
 
     1. jwt 구현 이전에 사용자 필터를 구현 할 수있도록 필터 부분을 추가함
     2. swagger를 추가함  -> [ http://localhost:8080/swagger-ui.html ]
+    3. 리엑트와 연동되오록 CORS 이슈 해결을 위해서  http.cors().configurationSource 코드를 작성

@@ -13,9 +13,10 @@ data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // AI
     var id : Int = 0,
-    var userEmail : String? = null,
     var username : String? = null,
     var password : String? = null,
+    var userEmail : String? = null,
+    var userFullname : String? = null,
     var userNickname : String? = null,
     var userRole : String? = null,
     var createdAt : LocalDateTime? =null,
