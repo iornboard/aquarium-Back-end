@@ -9,11 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import com.aquarium.dev.config.auth.oauth.PrincipalOauth2UserService
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.web.filter.CorsFilter
 import org.springframework.web.cors.CorsConfiguration
-
-
-
 
 
 @Configuration
@@ -35,29 +33,18 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.csrf().disable()
         http.cors().configurationSource { request -> CorsConfiguration().applyPermitDefaultValues() }   // 코드 내용은 잘 모르겠는데 CORS error를 막기위해서 사용할 수 있다고 함 (알아볼 것)
         // 출처 : https://velog.io/@dsunni/Spring-Boot-React-JWT%EB%A1%9C-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
+        http.csrf().disable()
         http
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 세션을 사용하지 않음 - JWT 사용!!  (토큰은 우선 나중에 적용하기)
-//                    .and()
-//                    .addFilter(corsFilter)  // cosr 필터시 cosr요청 외의 모든것도 허용됨
-//                    .httpBasic().disable()  // http에서(https X ) httpBasic을 허용하지 않음 - JWT 사용!!
-                .authorizeRequests()
-                    .antMatchers("/", "/home","/sample","/join","/login","/logout","/api/**").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/loginForm")
-                    .loginProcessingUrl("/login") // '/login' 요청시에 시큐리티가 대신 처리하는 구조
-                    .defaultSuccessUrl("/")
-                    .permitAll()
-                    .and()
-                    .oauth2Login()  // 아래부터 구글 로그인 로직
-                    .loginPage("/signin")
-                    .userInfoEndpoint()
-                    .userService(principalOauth2UserService)
-
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 세션을 사용하지 않음 - JWT 사용!!  (토큰은 우선 나중에 적용하기)
+            .and()
+            .addFilter(corsFilter)  // cosr 필터시 cosr요청 외의 모든것도 허용됨
+            .formLogin().disable()  // formLogin을 사용하지 않음
+            .httpBasic().disable()  // http에서(https X ) httpBasic을 허용하지 않음 - JWT 사용!!
+            .authorizeRequests()
+            .antMatchers("/api/**").permitAll()
+            .anyRequest().permitAll()
 
         //http.addFilterBefore(DevFliter(), BasicAuthenticationFilter::class.java)  // 커스텀 필터를 거는 방법(직접 걸기)
     }
