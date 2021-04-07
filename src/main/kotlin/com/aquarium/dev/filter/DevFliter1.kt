@@ -1,6 +1,7 @@
 package com.aquarium.dev.filter
 
 import java.io.IOException
+import java.io.PrintWriter
 import javax.servlet.*
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -14,14 +15,17 @@ class DevFliter1 : Filter {
         val res : HttpServletResponse = response as HttpServletResponse
 
         if(req.method.equals("POST")){
-            println("POST 요청됨")
-            val headerAuth : String = req.getHeader("Authorization")
+
+            val headerAuth : String? = req.getHeader("Authorization")
             println("headerAuth : $headerAuth")
+
+            if(headerAuth.equals("hello")){
+                chain.doFilter(req, res)
+            }else{
+                val outPrinterWriter : PrintWriter = res.writer
+                println("인증안됨")
+            }
         }
-
-        println("필터1")
-
-        chain.doFilter(req, res)
     }
 
 }

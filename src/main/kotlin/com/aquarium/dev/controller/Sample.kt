@@ -49,7 +49,8 @@ internal class Sample(userRepository: UserRepository) {
 
 
     @PostMapping("/token")
-    fun token() {
+    fun token(): String {
+        return "<h1>token</h1>"
     }
 
     @PostMapping("/join")
