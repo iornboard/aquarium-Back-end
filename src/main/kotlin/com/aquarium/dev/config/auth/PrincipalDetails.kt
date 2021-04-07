@@ -46,7 +46,6 @@ class PrincipalDetails(private val user: User) : UserDetails {
 
     // 아래 정보는 공부가 좀 더 필요함
     override fun getAuthorities(): Collection<GrantedAuthority> {
-        println("실행됨")
         val collet: MutableCollection<GrantedAuthority> = ArrayList()
         collet.add(GrantedAuthority { user.userRole.toString() })
         return collet

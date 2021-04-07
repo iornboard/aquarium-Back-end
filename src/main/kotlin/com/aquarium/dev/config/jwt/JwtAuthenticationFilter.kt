@@ -30,18 +30,16 @@ class JwtAuthenticationFilter( authenticationManager : AuthenticationManager ) :
         //web -> json -> mapper (로그인 요청)
         val mapper = ObjectMapper()
         val user : User = mapper.readValue(request.inputStream, User::class.java)
-        println("user : $user")
 
         // 토큰 생성
         val authenticationToken = UsernamePasswordAuthenticationToken(user.username, user.password )
-        println("JwtAuthenticationFilter : 토큰생성완료 : $authenticationToken")
 
         //authenticationManager -> principalservice의 로더 실행(authentication == 로그인 정보)
         //DB에 유저 정보가 존재 하는지
         val authentication = authManager.authenticate(authenticationToken)
 
-//        val principalDetailis = authentication.principal as PrincipalDetails
-//        println("Authentication : " + principalDetailis.username)
+        val principalDetailis = authentication.principal as PrincipalDetails
+        println("Authentication : " + principalDetailis.username)
 
         return authentication
     }
