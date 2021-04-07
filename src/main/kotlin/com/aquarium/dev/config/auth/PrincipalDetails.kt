@@ -13,8 +13,12 @@ import java.util.ArrayList
 
 //  !! 2개 타입을 구분없이 받기위해서 2개의 타입을 구현함
 
-class PrincipalDetails(private val user: User , private val attributes: MutableMap<String, Any>? = null) : UserDetails , OAuth2User {
+class PrincipalDetails(private val user: User) : UserDetails {
 
+
+    fun getUser(): User? {
+        return user
+    }
 
     override fun getPassword(): String {
         return user.password.toString()
@@ -41,16 +45,8 @@ class PrincipalDetails(private val user: User , private val attributes: MutableM
     }
 
     // 아래 정보는 공부가 좀 더 필요함
-
-    override fun getName(): String? {   // 아마 네임 ==  ID(sub)를 말하는 듯
-        return null
-    }
-
-    override fun getAttributes(): MutableMap<String, Any>? {
-        return attributes
-    }
-
     override fun getAuthorities(): Collection<GrantedAuthority> {
+        println("실행됨")
         val collet: MutableCollection<GrantedAuthority> = ArrayList()
         collet.add(GrantedAuthority { user.userRole.toString() })
         return collet

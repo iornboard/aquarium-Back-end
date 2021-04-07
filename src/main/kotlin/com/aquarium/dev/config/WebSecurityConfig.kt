@@ -1,5 +1,6 @@
 package com.aquarium.dev.config
 
+import com.aquarium.dev.config.jwt.JwtAuthenticationFilter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -8,12 +9,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import com.aquarium.dev.config.auth.oauth.PrincipalOauth2UserService
-import com.aquarium.dev.filter.JwtFilter
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.web.context.SecurityContextPersistenceFilter
 import org.springframework.web.filter.CorsFilter
-import org.springframework.web.cors.CorsConfiguration
+import org.springframework.security.authentication.AuthenticationManager
+
+
 
 @Configuration
 @EnableWebSecurity
@@ -23,9 +23,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private val corsFilter : CorsFilter? = null
 
-    @Autowired
-    private val principalOauth2UserService: PrincipalOauth2UserService? = null
-
     // 매서드의 리턴되는 오브젝트는 IOC로 등록되는 용도  (비밀번호 암호화 인코더)
     @Bean
     open fun encodePwd(): BCryptPasswordEncoder {
@@ -34,8 +31,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.addFilterBefore(JwtFilter(), SecurityContextPersistenceFilter::class.java)  // 커스텀 필터를 거는 방법(직접 걸기)
-        http.cors().configurationSource { request -> CorsConfiguration().applyPermitDefaultValues() }   // 코드 내용은 잘 모르겠는데 CORS error를 막기위해서 사용할 수 있다고 함 (알아볼 것)
+        //http.addFilterBefore(JwtFilter(), SecurityContextPersistenceFilter::class.java)  // Authorization 필터
+        //http.cors().configurationSource { request -> CorsConfiguration().applyPermitDefaultValues() }   // 코드 내용은 잘 모르겠는데 CORS error를 막기위해서 사용할 수 있다고 함 (알아볼 것)
         // 출처 : https://velog.io/@dsunni/Spring-Boot-React-JWT%EB%A1%9C-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
         http.csrf().disable()
         http
@@ -44,8 +41,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .addFilter(corsFilter)  // cosr 필터시 cosr요청 외의 모든것도 허용됨
             .formLogin().disable()  // formLogin을 사용하지 않음
             .httpBasic().disable()  // http에서(https X ) httpBasic을 허용하지 않음 - JWT 사용!!
+            .addFilter(JwtAuthenticationFilter(authenticationManager())) // formLogin 대신 커스텀 필터  + param AuthenticationManager
             .authorizeRequests()
-            .antMatchers("/api/**").permitAll()
+            .antMatchers("/**").permitAll()
             .anyRequest().permitAll()
 
         //http.addFilterBefore(DevFliter1(), BasicAuthenticationFilter::class.java)  // 커스텀 필터를 거는 방법(직접 걸기)

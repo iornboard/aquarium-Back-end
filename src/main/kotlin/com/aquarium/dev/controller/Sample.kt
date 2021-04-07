@@ -42,12 +42,6 @@ internal class Sample(userRepository: UserRepository) {
         return "sample"
     }
 
-    @PostMapping("/push")
-    fun push(): String? {
-        return "sample"
-    }
-
-
     @PostMapping("/token")
     fun token(): String {
         return "<h1>token</h1>"
@@ -60,8 +54,6 @@ internal class Sample(userRepository: UserRepository) {
         val rawPassword : String? = user.password
         val encPassword = bCryptPasswordEncoder!!.encode(rawPassword)
         user.password = encPassword
-        user.provider = "aquarium"
-        user.providerId ="aquarium"
         userRepository.save(user)
 
         return "redirect:/loginForm"

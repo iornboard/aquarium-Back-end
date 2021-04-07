@@ -22,7 +22,8 @@ class PrincipalDetailsService : UserDetailsService {
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String?): UserDetails? {
-        val user: User = userRepository?.findByUsername(username) ?: return null
+        println("UserDetail 실행")
+        val user: User = userRepository!!.findByUsername(username)
         return PrincipalDetails(user)
     }
 }
