@@ -1,5 +1,6 @@
 package com.aquarium.dev.filter
 
+import com.aquarium.dev.config.jwt.JwtProperties
 import java.io.IOException
 import java.io.PrintWriter
 import javax.servlet.*
@@ -16,10 +17,10 @@ class JwtFilter : Filter {
 
         if(req.method.equals("POST")){
 
-            val headerAuth : String? = req.getHeader("Authorization")
+            val headerAuth : String? = req.getHeader(JwtProperties.HEADER_STRING)
             println("headerAuth : $headerAuth")
 
-            if(headerAuth.equals("hello")){
+            if(headerAuth.equals(JwtProperties.SECRET)){
                 chain.doFilter(req, res)
             }else{
                 val outPrinterWriter : PrintWriter = res.writer

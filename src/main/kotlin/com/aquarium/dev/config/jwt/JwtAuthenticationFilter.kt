@@ -38,27 +38,27 @@ class JwtAuthenticationFilter( authenticationManager : AuthenticationManager ) :
         //DB에 유저 정보가 존재 하는지
         val authentication = authManager.authenticate(authenticationToken)
 
-        val principalDetailis = authentication.principal as PrincipalDetails
-        println("Authentication : " + principalDetailis.username)
 
+        //세션 영역에 저장됨
         return authentication
     }
-
 
     @Throws(IOException::class, ServletException::class)
     override fun successfulAuthentication(
         request: HttpServletRequest?, response: HttpServletResponse, chain: FilterChain?,
         authResult: Authentication
     ) {
+
         val principalDetailis = authResult.principal as PrincipalDetails
         val jwtToken: String = JWT.create()
             .withSubject(principalDetailis.username)
-            .withExpiresAt(Date(System.currentTimeMillis() + (60000*10)))
-            .withClaim("id", principalDetailis.username)   // 수정할 것
+            .withExpiresAt(Date(System.currentTimeMillis() + (JwtProperties.EXPIRATION_TIME)))
+            .withClaim("id", principalDetailis.getUser()!!.id)   // 수정할 것
             .withClaim("username", principalDetailis.username)
-            .sign(Algorithm.HMAC512("hello"))
+            .sign(Algorithm.HMAC512(JwtProperties.SECRET))
 
-        response.addHeader("Authorization", "Bearer " + jwtToken)
+        //응답 처리 (in header)
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken)  // 추후에 " "으로 분리 시킬 것임 공백이 필요
     }
 
     init {

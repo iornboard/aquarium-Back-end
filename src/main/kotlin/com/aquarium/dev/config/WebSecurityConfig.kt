@@ -1,6 +1,7 @@
 package com.aquarium.dev.config
 
 import com.aquarium.dev.config.jwt.JwtAuthenticationFilter
+import com.aquarium.dev.config.jwt.JwtAuthorizationFilter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -11,7 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.web.filter.CorsFilter
-import org.springframework.security.authentication.AuthenticationManager
+import com.aquarium.dev.domain.repository.UserRepository
+
+
+
 
 
 
@@ -19,6 +23,9 @@ import org.springframework.security.authentication.AuthenticationManager
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true )  // @secured 어노테이션 활성화 시킴 -> 특정 메서드에 간단히 걸 수 있는 인가 설정 , ( @PreAuthorize , @PostAuthorize 등등이 있다.)
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
+
+    @Autowired
+    private val userRepository: UserRepository? = null
 
     @Autowired
     private val corsFilter : CorsFilter? = null
@@ -42,8 +49,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .formLogin().disable()  // formLogin을 사용하지 않음
             .httpBasic().disable()  // http에서(https X ) httpBasic을 허용하지 않음 - JWT 사용!!
             .addFilter(JwtAuthenticationFilter(authenticationManager())) // formLogin 대신 커스텀 필터  + param AuthenticationManager
+            .addFilter(JwtAuthorizationFilter(authenticationManager(), userRepository ))
             .authorizeRequests()
-            .antMatchers("/**").permitAll()
+            .antMatchers("/home").permitAll()
             .anyRequest().permitAll()
 
         //http.addFilterBefore(DevFliter1(), BasicAuthenticationFilter::class.java)  // 커스텀 필터를 거는 방법(직접 걸기)
