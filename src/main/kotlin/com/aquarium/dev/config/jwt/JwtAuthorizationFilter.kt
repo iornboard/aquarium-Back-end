@@ -59,6 +59,7 @@ class JwtAuthorizationFilter(authenticationManager: AuthenticationManager? , var
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
+
         chain.doFilter(request, response);
     }
 
