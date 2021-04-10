@@ -29,7 +29,6 @@ class JwtAuthorizationFilter(authenticationManager: AuthenticationManager? , var
         // 사용자의 헤더에 보내진 토큰을 받음
         val jwtHeader: String? = request.getHeader(JwtProperties.HEADER_STRING)
 
-
         // 해더가 있는지 or 우리 토큰이 맟는지 -> 없으면 끝냄
         if (jwtHeader == null || !jwtHeader.startsWith(JwtProperties.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
