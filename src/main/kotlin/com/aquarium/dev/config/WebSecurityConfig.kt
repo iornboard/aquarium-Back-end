@@ -36,8 +36,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         //http.addFilterBefore(JwtFilter(), SecurityContextPersistenceFilter::class.java)  // Authorization 필터
-        http.cors().configurationSource { request -> CorsConfiguration().applyPermitDefaultValues() }   // 코드 내용은 잘 모르겠는데 CORS error를 막기위해서 사용할 수 있다고 함 (알아볼 것)
-        // 출처 : https://velog.io/@dsunni/Spring-Boot-React-JWT%EB%A1%9C-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
+        http.cors().configurationSource { request -> CorsConfiguration().applyPermitDefaultValues() }   // 코드 내용은 잘 모르겠는데 CORS error를 막기위해서 사용할 수 있다고 함 (알아볼 것)  // 출처 : https://velog.io/@dsunni/Spring-Boot-React-JWT%EB%A1%9C-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
         http.csrf().disable()
         http
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 세션을 사용하지 않음 - JWT 사용!!  (토큰은 우선 나중에 적용하기)
@@ -50,8 +49,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .authorizeRequests()
             .antMatchers("/home").permitAll()
             .anyRequest().permitAll()
-
-        //http.addFilterBefore(DevFliter1(), BasicAuthenticationFilter::class.java)  // 커스텀 필터를 거는 방법(직접 걸기)
     }
 
 }
