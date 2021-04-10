@@ -14,7 +14,11 @@ import java.util.ArrayList
 //  !! 2개 타입을 구분없이 받기위해서 2개의 타입을 구현함
 
 class PrincipalDetails(private val user: User , private val attributes: MutableMap<String, Any>? = null) : UserDetails , OAuth2User {
+    
 
+    fun getUser(): User? {
+        return user
+    }
 
     override fun getPassword(): String {
         return user.password.toString()
