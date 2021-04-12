@@ -50,3 +50,11 @@
         -> storage 패키지를 만들어서 파일 처리의 관한 서비스를 구현함
         -> file 관련 controller를 만들어서 파일관련 요청을 처리할 것임
         -> 우선 파일이 저장되는 부분은 kotlin/com/aquarium/dev/storage 여기임, 추후에 바꿀 것임
+
+남현수 - 21.04.13
+
+    1. 파일 업로드 구현
+        -> image 뿐만 아니라 파일 처리 부분을 어느정도 완료 하였음
+        -> 기존에 어거지로 되어 있었던 JAP를 기존 프로젝트에 맞게 다시 구성하였음 (File, Auth 엔티티 추가)
+        -> post controller , file controller를 작성함 
+       
