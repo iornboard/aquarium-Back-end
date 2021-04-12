@@ -13,7 +13,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-class FileStorageImpl: FileStorage{
+class FileStorageService: FileStorage{
 
     val rootLocation = Paths.get("C:\\Users\\KUCK_SU\\Documents\\project-aquarium\\aquarium-Back-end\\src\\main\\kotlin\\com\\aquarium\\dev\\storage")
 
