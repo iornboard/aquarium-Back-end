@@ -53,7 +53,7 @@ class JwtAuthenticationFilter( authenticationManager : AuthenticationManager ) :
         val jwtToken: String = JWT.create()
             .withSubject(principalDetailis.username)
             .withExpiresAt(Date(System.currentTimeMillis() + (JwtProperties.EXPIRATION_TIME)))
-            .withClaim("id", principalDetailis.getUser()!!.id)   // 수정할 것
+            .withClaim("id", principalDetailis.getUser()!!.userId)   // 수정할 것
             .withClaim("username", principalDetailis.username)
             .sign(Algorithm.HMAC512(JwtProperties.SECRET))
 

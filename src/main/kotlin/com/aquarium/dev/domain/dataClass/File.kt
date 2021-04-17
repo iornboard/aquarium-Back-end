@@ -1,4 +1,4 @@
-package com.aquarium.dev.domain.entity
+package com.aquarium.dev.domain.dataClass
 
 
 

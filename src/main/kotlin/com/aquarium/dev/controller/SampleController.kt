@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 
 @Controller
-internal class Sample(userRepository: UserRepository) {
+internal class SampleController(userRepository: UserRepository) {
 
     @Autowired
     private val userRepository: UserRepository

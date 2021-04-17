@@ -1,17 +1,15 @@
 package com.aquarium.dev.domain.entity
 
+
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class Post(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)  // AI
-        var id : Int = 0,
-        var userId : Int = 0,
+        @Column(name = "post_id")
+        var postId : Int = 0,
 
         var postTitle : String? = null,
         var postText : String? = null,
@@ -28,6 +26,10 @@ data class Post(
         var postIsBlinded : Boolean = false,
 
         var createdAt : LocalDateTime? =null,
-        var updatedAt : LocalDateTime? =null
+        var updatedAt : LocalDateTime? =null,
+
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "user_id")
+        var user : User
 
         )

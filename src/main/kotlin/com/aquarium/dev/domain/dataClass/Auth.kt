@@ -1,10 +1,10 @@
-package com.aquarium.dev.domain.entity
+package com.aquarium.dev.domain.dataClass
 
 import java.time.LocalDateTime
 
 data class Auth(
 
-    var id : Int = 0,
+    var userId : Int = 0,
     var userEmail : String? = null,
     var userFullname : String? = null,
     var userNickname : String? = null,
