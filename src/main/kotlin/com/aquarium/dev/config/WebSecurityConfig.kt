@@ -1,5 +1,6 @@
 package com.aquarium.dev.config
 
+import com.aquarium.dev.config.auth.oauth.PrincipalOauth2UserService
 import com.aquarium.dev.config.jwt.JwtAuthenticationFilter
 import com.aquarium.dev.config.jwt.JwtAuthorizationFilter
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,6 +21,11 @@ import org.springframework.web.cors.CorsConfiguration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true )  // @secured 어노테이션 활성화 시킴 -> 특정 메서드에 간단히 걸 수 있는 인가 설정 , ( @PreAuthorize , @PostAuthorize 등등이 있다.)
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
+
+    //! 임시 !//
+    @Autowired
+    private val principalOauth2UserService: PrincipalOauth2UserService? = null
+    //! 임시 !//
 
     @Autowired
     private val userRepository: UserRepository? = null
@@ -49,6 +55,14 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .authorizeRequests()
             .antMatchers("/home").permitAll()
             .anyRequest().permitAll()
+                //임시
+            .and()
+            .oauth2Login()  // 아래부터 구글 로그인 로직
+            .userInfoEndpoint()
+            .userService(principalOauth2UserService)
+
+                //임시
+
     }
 
 }
