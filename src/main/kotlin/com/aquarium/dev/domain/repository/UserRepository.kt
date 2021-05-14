@@ -1,8 +1,7 @@
 package com.aquarium.dev.domain.repository
 
-import com.aquarium.dev.domain.entity.User
+import com.aquarium.dev.domain.entity.User.User
 import org.springframework.data.jpa.repository.JpaRepository
-import java.util.*
 
 // 출처 : https://github.com/codingspecialist/Sringboot-Security-Basic-V1/blob/master/java/com/cos/securityex01/repository/UserRepository.java
 

@@ -1,6 +1,6 @@
 package com.aquarium.dev.controller
 
-import com.aquarium.dev.domain.entity.Comment
+import com.aquarium.dev.domain.entity.Community.Comment
 import com.aquarium.dev.domain.repository.CommentRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*

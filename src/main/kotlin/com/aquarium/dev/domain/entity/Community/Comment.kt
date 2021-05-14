@@ -1,4 +1,4 @@
-package com.aquarium.dev.domain.entity
+package com.aquarium.dev.domain.entity.Community
 
 import java.time.LocalDateTime
 import javax.persistence.*

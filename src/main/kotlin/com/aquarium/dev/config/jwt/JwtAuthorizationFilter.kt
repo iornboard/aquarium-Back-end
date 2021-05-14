@@ -1,7 +1,7 @@
 package com.aquarium.dev.config.jwt
 
 
-import com.aquarium.dev.domain.entity.User
+import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.UserRepository
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm

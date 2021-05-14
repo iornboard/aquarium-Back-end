@@ -55,13 +55,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .authorizeRequests()
             .antMatchers("/home").permitAll()
             .anyRequest().permitAll()
-                //임시
-            .and()
-            .oauth2Login()  // 아래부터 구글 로그인 로직
-            .userInfoEndpoint()
-            .userService(principalOauth2UserService)
-
-                //임시
 
     }
 

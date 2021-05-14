@@ -1,6 +1,7 @@
-package com.aquarium.dev.domain.entity
+package com.aquarium.dev.domain.entity.Community
 
 
+import com.aquarium.dev.domain.entity.User.User
 import java.time.LocalDateTime
 import javax.persistence.*
 

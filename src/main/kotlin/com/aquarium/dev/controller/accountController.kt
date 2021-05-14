@@ -3,7 +3,7 @@ package com.aquarium.dev.controller
 
 import com.aquarium.dev.config.jwt.JwtProperties
 import com.aquarium.dev.domain.dataClass.Auth
-import com.aquarium.dev.domain.entity.User
+import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.UserRepository
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
@@ -58,7 +58,7 @@ internal class accountController (userRepository: UserRepository) {
 
 
     @PostMapping("/join")
-    fun join( @RequestBody  user : User ): String? {
+    fun join( @RequestBody  user : User): String? {
 
         user.userRole = "USER_ROLE"
         user.username = user.userEmail
@@ -73,7 +73,7 @@ internal class accountController (userRepository: UserRepository) {
     }
 
     @PatchMapping("/user-image")
-    fun userImgUpdate( @RequestBody responseUser : User ): String? {
+    fun userImgUpdate( @RequestBody responseUser : User): String? {
 
         val targetUser : User = userRepository.getOne(responseUser.userId)
 

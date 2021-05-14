@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import com.aquarium.dev.domain.repository.UserRepository
 import com.aquarium.dev.config.auth.oauth.provider.OAuth2UserInfo
-import com.aquarium.dev.domain.entity.User
+import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.config.auth.PrincipalDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 

@@ -1,6 +1,6 @@
 package com.aquarium.dev.config.auth
 
-import com.aquarium.dev.domain.entity.User
+import com.aquarium.dev.domain.entity.User.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.oauth2.core.user.OAuth2User
@@ -13,7 +13,7 @@ import java.util.ArrayList
 
 //  !! 2개 타입을 구분없이 받기위해서 2개의 타입을 구현함
 
-class PrincipalDetails(private val user: User , private val attributes: MutableMap<String, Any>? = null) : UserDetails , OAuth2User {
+class PrincipalDetails(private val user: User, private val attributes: MutableMap<String, Any>? = null) : UserDetails , OAuth2User {
     
 
     fun getUser(): User? {

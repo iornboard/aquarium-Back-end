@@ -1,7 +1,7 @@
 package com.aquarium.dev.controller
 
-import com.aquarium.dev.domain.entity.Post
-import com.aquarium.dev.domain.entity.User
+import com.aquarium.dev.domain.entity.Community.Post
+import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.PostRepository
 import com.aquarium.dev.domain.repository.UserRepository
 import org.springframework.web.bind.annotation.*
