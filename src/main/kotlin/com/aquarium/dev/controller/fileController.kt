@@ -1,6 +1,6 @@
 package com.aquarium.dev.controller
 
-import com.aquarium.dev.domain.dataClass.File
+import com.aquarium.dev.domain.dto.FileDto
 import com.aquarium.dev.storage.FileStorage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
@@ -30,7 +30,7 @@ class fileController {
     lateinit var fileStorage: FileStorage
 
     @PostMapping("/image")
-    fun uploadMultipartFile(@RequestParam("img") file: MultipartFile):ResponseEntity<File> {
+    fun uploadMultipartFile(@RequestParam("img") file: MultipartFile):ResponseEntity<FileDto> {
         fileStorage.save(file)
 
         val fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -40,13 +40,13 @@ class fileController {
 
         println("fileDownloadUri : $fileDownloadUri")
 
-        val fileResponse = File()
+        val fileResponse = FileDto()
         fileResponse.filename =  file.originalFilename.toString()
         fileResponse.fileDownloadUri = fileDownloadUri
         fileResponse.fileType = file.contentType
         fileResponse.size = file.size
 
-        return ResponseEntity<File>(fileResponse, HttpStatus.OK)
+        return ResponseEntity<FileDto>(fileResponse, HttpStatus.OK)
     }
 
 

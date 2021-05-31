@@ -1,6 +1,8 @@
 package com.aquarium.dev.domain.entity.User
 
 
+import com.aquarium.dev.domain.entity.Community.Post
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -33,5 +35,8 @@ data class User(
     var provider : String? = null,  // 소셜 회원가입 정보 -> google, naver등
     var providerId : String? = null  // 소셜 회원가입 ID(숫자로 되어 있는 것)
 
+//    @OneToMany(mappedBy = "user")
+//    @JsonBackReference
+//    var posts : Set<Post>
 
 )

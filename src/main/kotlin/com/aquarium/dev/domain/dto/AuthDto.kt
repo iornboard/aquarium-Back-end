@@ -1,8 +1,6 @@
-package com.aquarium.dev.domain.dataClass
+package com.aquarium.dev.domain.dto
 
-import java.time.LocalDateTime
-
-data class Auth(
+data class AuthDto(
 
     var userId : Int = 0,
     var userEmail : String? = null,

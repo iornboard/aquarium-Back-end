@@ -1,7 +1,9 @@
 package com.aquarium.dev.domain.entity.Community
 
 
+import com.aquarium.dev.domain.dto.Community.PostDto
 import com.aquarium.dev.domain.entity.User.User
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -30,7 +32,26 @@ data class Post(
         var updatedAt : LocalDateTime? =null,
 
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "user_id")
+        @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+        @JsonManagedReference
         var user : User
+) {
 
-        )
+        fun toPostDto( post : Post) : PostDto {
+                return PostDto(
+                        postId = post.postId,
+                        postTitle = post.postTitle,
+                        postText = post.postText,
+                        postContentType = post.postContentType,
+                        postImgUrl = post.postImgUrl,
+                        postVideoUrl = post.postVideoUrl,
+                        postCommentCount = post.postCommentCount,
+                        postLikeCount = post.postLikeCount,
+                        postViewCount = post.postViewCount,
+                        postIsPrivate = post.postIsPrivate,
+                        postIsBlinded = post.postIsBlinded,
+                        createdAt = post.createdAt,
+                        updatedAt = post.updatedAt
+                )
+        }
+}

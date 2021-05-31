@@ -2,7 +2,7 @@ package com.aquarium.dev.controller
 
 
 import com.aquarium.dev.config.jwt.JwtProperties
-import com.aquarium.dev.domain.dataClass.Auth
+import com.aquarium.dev.domain.dto.AuthDto
 import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.UserRepository
 import com.auth0.jwt.JWT
@@ -30,7 +30,7 @@ internal class accountController (userRepository: UserRepository) {
 
 
     @GetMapping("/auth")
-    fun auth(@RequestHeader( JwtProperties.HEADER_STRING ) jwtHeader : String): Auth? {
+    fun auth(@RequestHeader( JwtProperties.HEADER_STRING ) jwtHeader : String): AuthDto? {
 
         // 해더가 있는지 or 우리 토큰이 맟는지 -> 없으면 끝냄
         if (jwtHeader == null || !jwtHeader.startsWith(JwtProperties.TOKEN_PREFIX)) {
@@ -44,7 +44,7 @@ internal class accountController (userRepository: UserRepository) {
             .getClaim("username").asString()
 
         val user : User = userRepository.findByUsername(username)
-        val responseAuth = Auth()
+        val responseAuth = AuthDto()
 
         responseAuth.userId = user.userId
         responseAuth.userEmail = user.userEmail

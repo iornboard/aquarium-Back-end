@@ -1,8 +1,8 @@
-package com.aquarium.dev.domain.dataClass
+package com.aquarium.dev.domain.dto
 
 
 
-data class File(
+data class FileDto(
 
     var filename : String? = null,
     var fileDownloadUri : String? = null,
