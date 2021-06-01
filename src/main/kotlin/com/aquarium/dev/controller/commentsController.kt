@@ -1,15 +1,21 @@
 package com.aquarium.dev.controller
 
+import com.aquarium.dev.domain.dto.Community.CommentDto
 import com.aquarium.dev.domain.entity.Community.Comment
+import com.aquarium.dev.domain.entity.Community.Post
+import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.CommentRepository
+import com.aquarium.dev.domain.repository.PostRepository
+import com.aquarium.dev.domain.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-class commentsController(commentRepository: CommentRepository) {
+class commentsController( userRepository : UserRepository , postRepository : PostRepository , commentRepository: CommentRepository ) {
 
-    @Autowired
+    private val userRepository : UserRepository
+    private val postRepository : PostRepository
     private val commentRepository: CommentRepository
 
     @GetMapping("/comments")
@@ -19,13 +25,30 @@ class commentsController(commentRepository: CommentRepository) {
         return  comments
     }
 
+    @GetMapping("/post-comments")
+    fun postComments( @RequestParam postId : Int ): MutableList<Comment?> {
+
+        println("postId : $postId")
+        val comments = commentRepository.findAllByPost_PostId(postId)
+        println("comments : $comments")
+        return comments
+    }
+
     @PostMapping("/create-comment")
-    fun createcomment( @RequestBody comment : Comment): String {
+    fun createcomment( @RequestBody commentDto : CommentDto): String {
+
+        val commentUser : User = userRepository.getOne(commentDto.userId)
+        val commentPost : Post = postRepository.getOne(commentDto.postId)
+
+        val comment = CommentDto().toComment(commentDto , commentUser , commentPost)
+
         commentRepository.save(comment)
         return "200 ok"
     }
 
     init {
+        this.userRepository  = userRepository
+        this.postRepository = postRepository
         this.commentRepository = commentRepository
     }
 

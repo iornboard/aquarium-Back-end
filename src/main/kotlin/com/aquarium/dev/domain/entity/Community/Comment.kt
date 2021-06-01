@@ -1,5 +1,8 @@
 package com.aquarium.dev.domain.entity.Community
 
+import com.aquarium.dev.domain.dto.Community.CommentDto
+import com.aquarium.dev.domain.entity.User.User
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -20,5 +23,32 @@ data class Comment(
     var commentIsBlinded : Boolean = false,
 
     var createdAt : LocalDateTime? =null,
-    var updatedAt : LocalDateTime? =null
-)
+    var updatedAt : LocalDateTime? =null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JsonManagedReference
+    var user : User,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id", referencedColumnName = "post_id", nullable = false)
+    @JsonManagedReference
+    var post : Post
+
+) {
+    fun toCommentDto( comment: Comment ) : CommentDto{
+        return CommentDto(
+            commentId = comment.commentId,
+            commentText = comment.commentText,
+            commentLikeCount = comment.commentLikeCount,
+            commentReCommentCount = comment.commentReCommentCount,
+            commentIsPrivate = comment.commentIsPrivate,
+            commentIsBlinded = comment.commentIsBlinded,
+            createdAt = comment.createdAt,
+            updatedAt = comment.updatedAt,
+            userId = comment.user.userId,
+            postId = comment.post.postId
+        )
+    }
+
+}

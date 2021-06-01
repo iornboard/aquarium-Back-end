@@ -32,7 +32,7 @@ data class PostDto(
     var userId : Int = 0
 ) {
 
-    fun toPost( postDto: PostDto , userId : User) : Post {
+    fun toPost( postDto: PostDto , user : User) : Post {
         return Post(
             postId = postDto.postId,
             postTitle = postDto.postTitle,
@@ -47,7 +47,7 @@ data class PostDto(
             postIsBlinded = postDto.postIsBlinded,
             createdAt = postDto.createdAt,
             updatedAt = postDto.updatedAt,
-            user = userId
+            user = user
         )
     }
 

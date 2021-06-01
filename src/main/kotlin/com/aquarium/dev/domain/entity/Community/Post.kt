@@ -51,7 +51,8 @@ data class Post(
                         postIsPrivate = post.postIsPrivate,
                         postIsBlinded = post.postIsBlinded,
                         createdAt = post.createdAt,
-                        updatedAt = post.updatedAt
+                        updatedAt = post.updatedAt,
+                        userId = post.user.userId
                 )
         }
 }

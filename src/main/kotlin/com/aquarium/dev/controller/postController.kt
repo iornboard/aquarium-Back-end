@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-internal class postController(postRepository : PostRepository, userRepository: UserRepository) {
+internal class postController(userRepository: UserRepository ,postRepository : PostRepository) {
 
-    private val postRepository : PostRepository
     private val userRepository : UserRepository
+    private val postRepository : PostRepository
 
     @PostMapping("/create-post")
-    fun createPost( @RequestBody requestPost : PostDto): String? {
+    fun createPost( @RequestBody postDto : PostDto): String? {
 
-        val postUser : User = userRepository.getOne(requestPost.userId)
+        val postUser : User = userRepository.getOne(postDto.userId)
 
-        var post = PostDto().toPost(requestPost , postUser)
+        var post = PostDto().toPost(postDto , postUser)
 
         postRepository.save(post)
 
@@ -36,8 +36,8 @@ internal class postController(postRepository : PostRepository, userRepository: U
     }
 
     init {
-        this.postRepository = postRepository
         this.userRepository  = userRepository
+        this.postRepository = postRepository
     }
 
 }
