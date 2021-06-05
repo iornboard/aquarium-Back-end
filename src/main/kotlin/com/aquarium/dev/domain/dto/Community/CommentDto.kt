@@ -4,16 +4,9 @@ import com.aquarium.dev.domain.entity.Community.Comment
 import com.aquarium.dev.domain.entity.Community.Post
 import com.aquarium.dev.domain.entity.User.User
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
 
 data class CommentDto (
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // AI
-    @Column(name = "comment_id")
     var commentId : Int = 0,
 
     var commentText : String? = null,
@@ -31,16 +24,16 @@ data class CommentDto (
     var postId : Int = 0
 
 ) {
-    fun toComment( commentDto: CommentDto, user : User, post : Post ) : Comment{
+    fun toComment( user : User, post : Post ) : Comment{
         return Comment(
-            commentId = commentDto.commentId,
-            commentText = commentDto.commentText,
-            commentLikeCount = commentDto.commentLikeCount,
-            commentReCommentCount = commentDto.commentReCommentCount,
-            commentIsPrivate = commentDto.commentIsPrivate,
-            commentIsBlinded = commentDto.commentIsBlinded,
-            createdAt = commentDto.createdAt,
-            updatedAt = commentDto.updatedAt,
+            commentId = commentId,
+            commentText = commentText,
+            commentLikeCount = commentLikeCount,
+            commentReCommentCount = commentReCommentCount,
+            commentIsPrivate = commentIsPrivate,
+            commentIsBlinded = commentIsBlinded,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
             user = user,
             post = post
         )

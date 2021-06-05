@@ -82,3 +82,7 @@
 
     1. comment 관련해서 entity를 수정하고, DTO, repository 내용 추가함 
     2. comment의 컨트롤러 개선함
+
+남현수 - 21.06.06
+
+    1. Chat 관련 entity, DTO ,controller, repository 등를 추가함 (채팅기능 추가)

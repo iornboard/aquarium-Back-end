@@ -40,7 +40,7 @@ class commentsController( userRepository : UserRepository , postRepository : Pos
         val commentUser : User = userRepository.getOne(commentDto.userId)
         val commentPost : Post = postRepository.getOne(commentDto.postId)
 
-        val comment = CommentDto().toComment(commentDto , commentUser , commentPost)
+        val comment = commentDto.toComment( commentUser , commentPost)
 
         commentRepository.save(comment)
         return "200 ok"

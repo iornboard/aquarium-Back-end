@@ -32,21 +32,21 @@ data class PostDto(
     var userId : Int = 0
 ) {
 
-    fun toPost( postDto: PostDto , user : User) : Post {
+    fun toPost( user : User) : Post {
         return Post(
-            postId = postDto.postId,
-            postTitle = postDto.postTitle,
-            postText = postDto.postText,
-            postContentType = postDto.postContentType,
-            postImgUrl = postDto.postImgUrl,
-            postVideoUrl = postDto.postVideoUrl,
-            postCommentCount = postDto.postCommentCount,
-            postLikeCount = postDto.postLikeCount,
-            postViewCount = postDto.postViewCount,
-            postIsPrivate = postDto.postIsPrivate,
-            postIsBlinded = postDto.postIsBlinded,
-            createdAt = postDto.createdAt,
-            updatedAt = postDto.updatedAt,
+            postId = postId,
+            postTitle = postTitle,
+            postText = postText,
+            postContentType = postContentType,
+            postImgUrl = postImgUrl,
+            postVideoUrl = postVideoUrl,
+            postCommentCount = postCommentCount,
+            postLikeCount = postLikeCount,
+            postViewCount = postViewCount,
+            postIsPrivate = postIsPrivate,
+            postIsBlinded = postIsBlinded,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
             user = user
         )
     }
