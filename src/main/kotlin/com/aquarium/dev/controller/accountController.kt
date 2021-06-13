@@ -28,7 +28,6 @@ internal class accountController (userRepository: UserRepository) {
         return "it is a foo"
     }
 
-
     @GetMapping("/auth")
     fun auth(@RequestHeader( JwtProperties.HEADER_STRING ) jwtHeader : String): AuthDto? {
 
@@ -56,7 +55,6 @@ internal class accountController (userRepository: UserRepository) {
         return responseAuth
     }
 
-
     @PostMapping("/join")
     fun join( @RequestBody  user : User): String? {
 
@@ -83,6 +81,15 @@ internal class accountController (userRepository: UserRepository) {
         return "redirect:/api/signup"
     }
 
+    @GetMapping("/user-info")
+    fun getUserIdToInfo( @RequestParam userId : Int ): User? {
+
+        val targetUserInfo : User = userRepository.getOne(userId)
+
+        println(targetUserInfo)
+
+        return targetUserInfo
+    }
 
 
     init {
