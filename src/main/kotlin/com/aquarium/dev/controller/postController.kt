@@ -19,7 +19,7 @@ internal class postController(userRepository: UserRepository ,postRepository : P
 
         val postUser : User = userRepository.getOne(postDto.userId)
 
-        var post = PostDto().toPost(postUser)
+        var post = postDto.toPost(postUser)
 
         postRepository.save(post)
 

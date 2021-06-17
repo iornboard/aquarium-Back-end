@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 class FileStorageService: FileStorage{
 
-    val rootLocation = Paths.get("C:\\Users\\KUCK_SU\\Documents\\project-aquarium\\aquarium-Back-end\\src\\main\\kotlin\\com\\aquarium\\dev\\storage")
+    val rootLocation = Paths.get("C:\\Users\\CS2-07\\Documents\\aquarium\\aquarium-Back-end\\src\\main\\kotlin\\com\\aquarium\\dev\\storage")
 
     override fun save(file: MultipartFile){
         Files.copy(file.getInputStream(), this.rootLocation.resolve(file.originalFilename.toString()))

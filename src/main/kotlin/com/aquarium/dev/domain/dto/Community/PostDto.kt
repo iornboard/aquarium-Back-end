@@ -5,7 +5,6 @@ import com.aquarium.dev.domain.entity.User.User
 import java.time.LocalDateTime
 import javax.persistence.*
 
-@Entity
 data class PostDto(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // AI
