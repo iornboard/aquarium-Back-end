@@ -42,15 +42,17 @@ internal class accountController (userRepository: UserRepository) {
         val username: String? = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(token)
             .getClaim("username").asString()
 
-        val user : User = userRepository.findByUsername(username)
+        val user : User? = userRepository.findByUsername(username)
         val responseAuth = AuthDto()
 
-        responseAuth.userId = user.userId
-        responseAuth.userEmail = user.userEmail
-        responseAuth.userFullname = user.userFullname
-        responseAuth.userNickname = user.userNickname
-        responseAuth.userImgUrl = user.userImgUrl
-        responseAuth.userRole = user.userRole
+        if(user != null){
+            responseAuth.userId = user.userId
+            responseAuth.userEmail = user.userEmail
+            responseAuth.userFullname = user.userFullname
+            responseAuth.userNickname = user.userNickname
+            responseAuth.userImgUrl = user.userImgUrl
+            responseAuth.userRole = user.userRole
+        }
 
         return responseAuth
     }

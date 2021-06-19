@@ -45,17 +45,20 @@ class JwtAuthorizationFilter(authenticationManager: AuthenticationManager? , var
 
         // ( 정상적인 처리 ) username이 정상적으로 있을 때 -> DB의 user객체를 찾는다.
         if (username != null) {
-            val user: User = userRepository!!.findByUsername(username);
+            val user: User? = userRepository?.findByUsername(username);
 
-            // user정보를 바탕으로 Authentication 객체를 만든다.
-            val principalDetails = PrincipalDetails(user)
-            val authentication : Authentication = UsernamePasswordAuthenticationToken(
+            if(user != null){
+                // user정보를 바탕으로 Authentication 객체를 만든다.
+                val principalDetails = PrincipalDetails(user)
+                val authentication : Authentication = UsernamePasswordAuthenticationToken(
                     principalDetails,
                     null,  // 인증용이 아닌 Authentication 객체를 만들기 때문에 패스워드는 비워놓는다.
                     principalDetails.authorities)
 
-            // 강제로 시큐리티의 세션에 접근해서 Authentication을 저장(인증용은 아닌 듯 )
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                // 강제로 시큐리티의 세션에 접근해서 Authentication을 저장(인증용은 아닌 듯 )
+                SecurityContextHolder.getContext().setAuthentication(authentication)
+            }
+
         }
 
 

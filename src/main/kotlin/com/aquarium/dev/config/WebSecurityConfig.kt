@@ -1,5 +1,6 @@
 package com.aquarium.dev.config
 
+import com.aquarium.dev.config.auth.oauth.AuthenticationSuccessHandler
 import com.aquarium.dev.config.auth.oauth.PrincipalOauth2UserService
 import com.aquarium.dev.config.jwt.JwtAuthenticationFilter
 import com.aquarium.dev.config.jwt.JwtAuthorizationFilter
@@ -15,6 +16,10 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.web.filter.CorsFilter
 import com.aquarium.dev.domain.repository.UserRepository
 import org.springframework.web.cors.CorsConfiguration
+import org.springframework.security.web.authentication.logout.LogoutFilter
+
+
+
 
 
 @Configuration
@@ -41,6 +46,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
+
         //http.addFilterBefore(JwtFilter(), SecurityContextPersistenceFilter::class.java)  // Authorization 필터
         http.cors().configurationSource { request -> CorsConfiguration().applyPermitDefaultValues() }   // 코드 내용은 잘 모르겠는데 CORS error를 막기위해서 사용할 수 있다고 함 (알아볼 것)  // 출처 : https://velog.io/@dsunni/Spring-Boot-React-JWT%EB%A1%9C-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
         http.csrf().disable()
@@ -55,6 +61,14 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .authorizeRequests()
             .antMatchers("/home").permitAll()
             .anyRequest().permitAll()
+
+        http.oauth2Login()
+            .userInfoEndpoint().userService(principalOauth2UserService)
+            .and()
+            .successHandler(AuthenticationSuccessHandler(authenticationManager()))
+//            .failureHandler(configFailureHandler())
+            .permitAll();
+
 
     }
 

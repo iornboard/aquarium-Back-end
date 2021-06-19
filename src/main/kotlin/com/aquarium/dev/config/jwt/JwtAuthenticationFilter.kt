@@ -34,6 +34,8 @@ class JwtAuthenticationFilter( authenticationManager : AuthenticationManager ) :
         // 토큰 생성
         val authenticationToken = UsernamePasswordAuthenticationToken(user.username, user.password )
 
+        println("authenticationToken : $authenticationToken")
+
         //authenticationManager -> principalservice의 로더 실행(authentication == 로그인 정보)
         //DB에 유저 정보가 존재 하는지
         val authentication = authManager.authenticate(authenticationToken)

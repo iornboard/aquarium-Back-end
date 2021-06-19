@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-
-
-
+import org.springframework.web.bind.annotation.RequestHeader
 
 
 @Controller
@@ -41,9 +39,11 @@ internal class SampleController(userRepository: UserRepository) {
         return "sample"
     }
 
-    @PostMapping("/token")
+    @GetMapping("/token" )
     fun token(): String {
-        return "<h1>token</h1>"
+
+        return "redirect:http://www.naver.com"
+
     }
 
     @PostMapping("/join")
