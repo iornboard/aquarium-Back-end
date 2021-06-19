@@ -5,4 +5,6 @@ interface OAuth2UserInfo {
     val provider: String?
     val email: String?
     val name: String?
+    val userNickname : String?
+    val userImgUrl : String?
 }

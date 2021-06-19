@@ -24,7 +24,7 @@ class JwtAuthorizationFilter(authenticationManager: AuthenticationManager? , var
     @Throws(IOException::class, ServletException::class)
     protected override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {
 
-        println("인증 요청이 실행됩니다. ")
+        println("JwtAuthorizationFilter 진입")
 
         // 사용자의 헤더에 보내진 토큰을 받음
         val jwtHeader: String? = request.getHeader(JwtProperties.HEADER_STRING)

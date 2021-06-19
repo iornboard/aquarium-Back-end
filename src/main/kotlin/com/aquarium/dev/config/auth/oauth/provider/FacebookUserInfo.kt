@@ -11,6 +11,12 @@ class FacebookUserInfo(private val attributes: Map<String, Any>) : OAuth2UserInf
     override val email: String?
         get() = attributes["email"] as String?
 
+    override val userNickname : String?
+        get() = attributes["name"] as String?
+
+    override val userImgUrl : String?
+        get() = attributes["imageUrl"] as String?
+
     override val provider: String
         get() = "facebook"
 

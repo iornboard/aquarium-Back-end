@@ -1,6 +1,11 @@
 package com.aquarium.dev.controller
 
 
+import com.aquarium.dev.config.auth.PrincipalDetails
+import com.aquarium.dev.config.auth.oauth.provider.FacebookUserInfo
+import com.aquarium.dev.config.auth.oauth.provider.GoogleUserInfo
+import com.aquarium.dev.config.auth.oauth.provider.NaverUserInfo
+import com.aquarium.dev.config.auth.oauth.provider.OAuth2UserInfo
 import com.aquarium.dev.config.jwt.JwtProperties
 import com.aquarium.dev.domain.dto.AuthDto
 import com.aquarium.dev.domain.entity.User.User
@@ -10,6 +15,11 @@ import com.auth0.jwt.algorithms.Algorithm
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
+
+import org.springframework.web.bind.annotation.RequestBody
+
+import org.springframework.web.bind.annotation.PostMapping
+import java.util.*
 
 
 @RestController

@@ -67,7 +67,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .and()
             .successHandler(AuthenticationSuccessHandler(authenticationManager()))
 //            .failureHandler(configFailureHandler())
-            .permitAll();
+            .permitAll()
 
 
     }
