@@ -35,7 +35,7 @@ data class TaskDto(
     var createdAt : LocalDateTime? = LocalDateTime.now(),
     var updatedAt : LocalDateTime? = LocalDateTime.now(),
 
-    var userId : Set<Int>? = null
+    var userIdList : Set<Int>? = null
 
 ) {
 

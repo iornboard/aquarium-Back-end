@@ -49,7 +49,7 @@ data class Task (
                 joinColumns = [JoinColumn(name = "task_id" ,referencedColumnName = "task_id")],
                 inverseJoinColumns = [JoinColumn(name = "user_id" ,referencedColumnName = "user_id")]
         )
-        @JsonIgnore
+//        @JsonIgnore
         var user : Set<User>
 
         )  {
@@ -71,7 +71,7 @@ data class Task (
                         taskIsWorking = taskIsWorking,
                         taskIsEnd = taskIsEnd,
                         taskIsAccept = taskIsAccept,
-                        userId = user.map{ it -> it.userId }.toSet()
+                        userIdList = user.map{ it.userId }.toSet()
                 )
         }
 }
