@@ -98,11 +98,23 @@ internal class accountController (userRepository: UserRepository) {
 
         val targetUserInfo : User = userRepository.getOne(userId)
 
-        println(targetUserInfo)
-
         return targetUserInfo
     }
 
+    @GetMapping("/user-info-all")
+    fun getAllUserIdToInfo( @RequestParam userId : Int? ): Set<User?> {
+
+        val targetUserInfo = userRepository.findAll()
+
+        if(userId != null){
+            val requestUser = userRepository.getOne(userId)
+
+            return targetUserInfo.toSet() - setOf<User>(requestUser)
+        }
+        else{
+            return targetUserInfo.toSet()
+        }
+    }
 
     init {
         this.userRepository = userRepository

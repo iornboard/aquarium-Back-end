@@ -1,5 +1,6 @@
 package com.aquarium.dev.domain.dto.Project
 
+import com.aquarium.dev.domain.entity.Chat.ChatRoom
 import com.aquarium.dev.domain.entity.Community.Post
 import com.aquarium.dev.domain.entity.Project.Task
 import com.aquarium.dev.domain.entity.User.User
@@ -35,7 +36,13 @@ data class TaskDto(
     var createdAt : LocalDateTime? = LocalDateTime.now(),
     var updatedAt : LocalDateTime? = LocalDateTime.now(),
 
-    var userIdList : Set<Int>? = null
+    var userIdList : Set<Int>? = null,
+
+    // !!hardCoding!! //
+
+    var chatRoomId: Int? = null
+
+    // !!hardCoding!! //
 
 ) {
 
@@ -43,7 +50,6 @@ data class TaskDto(
         return Task(
             taskId = taskId,
             projectId = projectId,
-
             taskName = taskName,
             taskDescription = taskDescription,
             taskStatus =  taskStatus,
@@ -51,17 +57,15 @@ data class TaskDto(
             taskVideoUrl = taskVideoUrl,
             taskMemo = taskMemo,
             taskType = taskType,
-
             taskStartDate = taskStartDate,
             taskEndDate = taskEndDate,
-
             taskProperties = taskProperties,
-
             taskIsWorking = taskIsWorking,
             taskIsEnd = taskIsEnd,
             taskIsAccept = taskIsAccept,
+            user = user,
 
-            user = user
+            chatRoomId = chatRoomId
         )
     }
 

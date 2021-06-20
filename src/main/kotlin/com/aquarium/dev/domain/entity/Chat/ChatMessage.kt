@@ -57,7 +57,7 @@ data class ChatMessage(
             timestamp =  Timestamp.valueOf(updatedAt).time,
             hasError = false,
 
-            author = AuthorDto(username=user.username, id=user.userId, avatarUrl = user.userImgUrl)
+            author = AuthorDto(username=user.userNickname, id=user.userId, avatarUrl = user.userImgUrl)
             //buttons = ButtonsDto()
         )
     }

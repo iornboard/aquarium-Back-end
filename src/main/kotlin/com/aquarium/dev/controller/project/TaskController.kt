@@ -1,18 +1,21 @@
 package com.aquarium.dev.controller.project
 
 import com.aquarium.dev.domain.dto.Project.TaskDto
+import com.aquarium.dev.domain.entity.Chat.ChatRoom
 import com.aquarium.dev.domain.entity.Project.Task
 import com.aquarium.dev.domain.entity.User.User
+import com.aquarium.dev.domain.repository.ChatRoomRepository
 import com.aquarium.dev.domain.repository.TaskRepository
 import com.aquarium.dev.domain.repository.UserRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-class TaskController(userRepository : UserRepository , taskRepository : TaskRepository) {
+class TaskController(userRepository : UserRepository , taskRepository : TaskRepository , chatRoomRepository : ChatRoomRepository) {
 
     private val userRepository : UserRepository
     private val taskRepository : TaskRepository
+    private val chatRoomRepository : ChatRoomRepository
 
 
     @PostMapping("/create-task")
@@ -20,8 +23,10 @@ class TaskController(userRepository : UserRepository , taskRepository : TaskRepo
 
         // 가장 쉬운 방법
         val taskUsers : Set<User> = taskDto.userIdList!!.map{ it -> userRepository.getOne(it) }.toSet()
+        val taskChatRoom : ChatRoom = chatRoomRepository.save(ChatRoom(user=taskUsers))
 
         val task = taskDto.toTask(taskUsers)
+        task.chatRoomId = taskChatRoom.roomId
 
         taskRepository.save(task)
     }
@@ -51,6 +56,7 @@ class TaskController(userRepository : UserRepository , taskRepository : TaskRepo
     init {
         this.userRepository  = userRepository
         this.taskRepository  = taskRepository
+        this.chatRoomRepository = chatRoomRepository
     }
 
 
