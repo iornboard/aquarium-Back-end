@@ -1,5 +1,8 @@
 package com.aquarium.dev.domain.entity.Project
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedBy
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -25,7 +28,12 @@ data class Stamp (
         var stampEndTime : String? = null,
         var stampStartTime : String? = null,
 
-        var createdAt : LocalDateTime? =null,
-        var updatedAt : LocalDateTime? =null
+        @CreatedDate
+        @JsonIgnore
+        var createdAt : LocalDateTime? = LocalDateTime.now(),
+
+        @LastModifiedBy
+        @JsonIgnore
+        var updatedAt : LocalDateTime? = LocalDateTime.now()
 
         )

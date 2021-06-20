@@ -32,8 +32,6 @@ data class CommentDto (
             commentReCommentCount = commentReCommentCount,
             commentIsPrivate = commentIsPrivate,
             commentIsBlinded = commentIsBlinded,
-            createdAt = createdAt,
-            updatedAt = updatedAt,
             user = user,
             post = post
         )

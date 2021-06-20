@@ -44,8 +44,6 @@ data class PostDto(
             postViewCount = postViewCount,
             postIsPrivate = postIsPrivate,
             postIsBlinded = postIsBlinded,
-            createdAt = createdAt,
-            updatedAt = updatedAt,
             user = user
         )
     }

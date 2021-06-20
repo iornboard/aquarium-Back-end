@@ -4,6 +4,9 @@ package com.aquarium.dev.domain.entity.User
 import com.aquarium.dev.domain.entity.Chat.ChatRoom
 import com.aquarium.dev.domain.entity.Community.Post
 import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedBy
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -30,8 +33,13 @@ data class User(
     var userIsAgree : Boolean = false,
 
     var userLastAccess : LocalDateTime? =null,
-    var createdAt : LocalDateTime? =null,
-    var updatedAt : LocalDateTime? =null,
+    @CreatedDate
+    @JsonIgnore
+    var createdAt : LocalDateTime? = LocalDateTime.now(),
+
+    @LastModifiedBy
+    @JsonIgnore
+    var updatedAt : LocalDateTime? = LocalDateTime.now(),
 
     var provider : String? = null,  // 소셜 회원가입 정보 -> google, naver등
     var providerId : String? = null  // 소셜 회원가입 ID(숫자로 되어 있는 것)
