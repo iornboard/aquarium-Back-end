@@ -43,7 +43,8 @@ class TaskController(userRepository : UserRepository , taskRepository : TaskRepo
 
 
     @PostMapping("/update-task")
-    fun updateTask( @RequestBody body : String ) {
+    fun updateTask( @RequestBody taskDto : TaskDto ) {
+
 
     }
 
@@ -51,6 +52,17 @@ class TaskController(userRepository : UserRepository , taskRepository : TaskRepo
     @GetMapping("/delete-task")
     fun deleteTask() {
 
+    }
+
+    @PostMapping("/update-task-img")
+    fun updateTaskImg( @RequestBody taskDto : TaskDto ) : Task{
+
+        val patchTask = taskRepository.getOne(taskDto.taskId)
+
+        patchTask.taskImgUrl = taskDto.taskImgUrl
+        taskRepository.save(patchTask)
+
+        return patchTask
     }
 
     init {
