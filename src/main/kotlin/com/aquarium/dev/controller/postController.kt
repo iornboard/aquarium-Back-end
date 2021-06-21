@@ -5,6 +5,7 @@ import com.aquarium.dev.domain.entity.Community.Post
 import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.PostRepository
 import com.aquarium.dev.domain.repository.UserRepository
+import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -31,7 +32,13 @@ internal class postController(userRepository: UserRepository ,postRepository : P
     fun post(): MutableList<Post?> {
 
         val posts : MutableList<Post?> = postRepository.findAll()
+
+        // !! hardCoding !!
+        posts.reverse()
+        // !! hardCoding !!
+
         println("posts : $posts")
+
         return posts
     }
 
