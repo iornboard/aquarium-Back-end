@@ -3,12 +3,8 @@ package com.aquarium.dev.domain.dto.Community
 import com.aquarium.dev.domain.entity.Community.Post
 import com.aquarium.dev.domain.entity.User.User
 import java.time.LocalDateTime
-import javax.persistence.*
 
 data class PostDto(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // AI
-    @Column(name = "post_id")
     var postId : Int = 0,
 
     var postTitle : String? = null,

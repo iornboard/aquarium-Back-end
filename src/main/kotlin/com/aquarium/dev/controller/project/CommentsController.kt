@@ -1,4 +1,4 @@
-package com.aquarium.dev.controller
+package com.aquarium.dev.controller.project
 
 import com.aquarium.dev.domain.dto.Community.CommentDto
 import com.aquarium.dev.domain.entity.Community.Comment

@@ -1,11 +1,10 @@
-package com.aquarium.dev.controller
+package com.aquarium.dev.controller.project
 
 import com.aquarium.dev.domain.dto.Community.PostDto
 import com.aquarium.dev.domain.entity.Community.Post
 import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.PostRepository
 import com.aquarium.dev.domain.repository.UserRepository
-import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
 
 @RestController
