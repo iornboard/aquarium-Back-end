@@ -28,33 +28,38 @@ data class UserDto (
     var provider : String? = null,  // 소셜 회원가입 정보 -> google, naver등
     var providerId : String? = null  // 소셜 회원가입 ID(숫자로 되어 있는 것)
 
-)
+) {
 
-fun UserDto.toUser(user : User) : UserDto{
+    fun toUserDto(user : User) : UserDto {
 
-    return UserDto().apply{
-        this.userId =  user.userId
-        this.username =  user.username
-        this.password = user.password
+        return UserDto().apply {
+            this.userId = user.userId
+            this.username = user.username
+            this.password = user.password
 
-        this.userEmail = user.userEmail
-        this.userFullname = user.userFullname
-        this.userNickname = user.userNickname
-        this.userImgUrl = user.userImgUrl
+            this.userEmail = user.userEmail
+            this.userFullname = user.userFullname
+            this.userNickname = user.userNickname
+            this.userImgUrl = user.userImgUrl
 
-        this.userFollowerCount = user.userFollowerCount
-        this.userFollowingCount = user.userFollowingCount
-        this.userNoticeCount = user.userNoticeCount
+            this.userFollowerCount = user.userFollowerCount
+            this.userFollowingCount = user.userFollowingCount
+            this.userNoticeCount = user.userNoticeCount
 
-        this.userRole = user.userRole
-        this.userIsAgree = user.userIsAgree
+            this.userRole = user.userRole
+            this.userIsAgree = user.userIsAgree
 
-        this.userLastAccess = user.userLastAccess
+            this.userLastAccess = user.userLastAccess
 
-        this.createdAt = user.createdAt
-        this.updatedAt = user.updatedAt
+            this.createdAt = user.createdAt
+            this.updatedAt = user.updatedAt
 
-        this.provider = user.provider
-        this.providerId = user.providerId
+            this.provider = user.provider
+            this.providerId = user.providerId
+        }
     }
 }
+
+
+
+

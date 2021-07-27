@@ -12,7 +12,7 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-data class User(
+data class User (
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // AI
@@ -45,37 +45,33 @@ data class User(
     var provider : String? = null,  // 소셜 회원가입 정보 -> google, naver등
     var providerId : String? = null  // 소셜 회원가입 ID(숫자로 되어 있는 것)
 
-)
+) {
+    fun toUser(userDto : UserDto) : User{
 
+        return User().apply {
+            this.userId =  userDto.userId
+            this.username =  userDto.username
+            this.password = userDto.password
 
-fun User.toUser(userDto : UserDto) : User{
+            this.userEmail = userDto.userEmail
+            this.userFullname = userDto.userFullname
+            this.userNickname = userDto.userNickname
+            this.userImgUrl = userDto.userImgUrl
 
-    return User().apply {
+            this.userFollowerCount = userDto.userFollowerCount
+            this.userFollowingCount = userDto.userFollowingCount
+            this.userNoticeCount = userDto.userNoticeCount
 
-        this.userId =  userDto.userId
-        this.username =  userDto.username
-        this.password = userDto.password
+            this.userRole = userDto.userRole
+            this.userIsAgree = userDto.userIsAgree
 
-        this.userEmail = userDto.userEmail
-        this.userFullname = userDto.userFullname
-        this.userNickname = userDto.userNickname
-        this.userImgUrl = userDto.userImgUrl
+            this.userLastAccess = userDto.userLastAccess
 
-        this.userFollowerCount = userDto.userFollowerCount
-        this.userFollowingCount = userDto.userFollowingCount
-        this.userNoticeCount = userDto.userNoticeCount
+            this.createdAt = userDto.createdAt
+            this.updatedAt = userDto.updatedAt
 
-        this.userRole = userDto.userRole
-        this.userIsAgree = userDto.userIsAgree
-
-        this.userLastAccess = userDto.userLastAccess
-
-        this.createdAt = userDto.createdAt
-        this.updatedAt = userDto.updatedAt
-
-        this.provider = userDto.provider
-        this.providerId = userDto.providerId
-
+            this.provider = userDto.provider
+            this.providerId = userDto.providerId
+        }
     }
-
 }
