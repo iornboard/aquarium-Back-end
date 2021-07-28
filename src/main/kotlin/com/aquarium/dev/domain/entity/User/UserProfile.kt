@@ -1,5 +1,6 @@
 package com.aquarium.dev.domain.entity.User
 
+import com.aquarium.dev.domain.dto.User.UserProfileDto
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedBy
@@ -29,4 +30,22 @@ data class UserProfile (
         @JsonIgnore
         var updatedAt : LocalDateTime? = LocalDateTime.now()
 
-        )
+){
+      fun toUserProfile() : UserProfileDto {
+
+              return UserProfileDto(
+                      Id = Id,
+                      userId = userId,
+
+                      profileBirthday = profileBirthday,
+                      profileGender  = profileGender,
+                      profileJob  = profileJob,
+                      profileLocation  = profileLocation,
+                      profilePageImgUrl  = profilePageImgUrl,
+                      profileUserInfo  = profileUserInfo,
+
+                      createdAt = createdAt,
+                      updatedAt = updatedAt
+              )
+      }
+}
