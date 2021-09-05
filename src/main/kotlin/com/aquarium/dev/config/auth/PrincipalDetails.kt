@@ -59,4 +59,9 @@ class PrincipalDetails(private val user: User, private val attributes: MutableMa
         collet.add(GrantedAuthority { user.userRole.toString() })
         return collet
     }
+
+    fun getUserNickname(): String {
+        return user.userNickname.toString()
+    }
+
 }

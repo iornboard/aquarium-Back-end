@@ -8,6 +8,7 @@ import com.aquarium.dev.config.auth.oauth.provider.NaverUserInfo
 import com.aquarium.dev.config.auth.oauth.provider.OAuth2UserInfo
 import com.aquarium.dev.config.jwt.JwtProperties
 import com.aquarium.dev.domain.dto.AuthDto
+import com.aquarium.dev.domain.dto.JwtDto
 import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.UserRepository
 import com.auth0.jwt.JWT
@@ -34,7 +35,7 @@ internal class oAuthController (userRepository: UserRepository) {
     private val bCryptPasswordEncoder: BCryptPasswordEncoder? = null
 
     @PostMapping("/oauth/jwt/google")
-    fun createGoogleJwt(@RequestBody oauthData: Map<String?, Any?>): String? {
+    fun createGoogleJwt(@RequestBody oauthData: Map<String?, Any?>): JwtDto? {
 
         val googleUser : OAuth2UserInfo = GoogleUserInfo(oauthData.get("profileObj") as Map<String, Any>)
 
@@ -69,14 +70,14 @@ internal class oAuthController (userRepository: UserRepository) {
             .withClaim("username", user.username)
             .sign(Algorithm.HMAC512(JwtProperties.SECRET))
 
-        return JwtProperties.TOKEN_PREFIX + jwtToken
+        return  JwtDto(redirectUrl = user.userNickname , authorization = JwtProperties.TOKEN_PREFIX + jwtToken)
     }
 
 
 
 
     @PostMapping("/oauth/jwt/facebook")
-    fun createFacebookJwt(@RequestBody oauthData: Map<String?, Any?>): String? {
+    fun createFacebookJwt(@RequestBody oauthData: Map<String?, Any?>): JwtDto? {
 
         val facebookUser : OAuth2UserInfo = FacebookUserInfo(oauthData as Map<String, Any>)
 
@@ -110,14 +111,14 @@ internal class oAuthController (userRepository: UserRepository) {
             .withClaim("username", user.username)
             .sign(Algorithm.HMAC512(JwtProperties.SECRET))
 
-        return JwtProperties.TOKEN_PREFIX + jwtToken
+        return  JwtDto(redirectUrl = user.userNickname , authorization = JwtProperties.TOKEN_PREFIX + jwtToken)
     }
 
 
 
 
     @PostMapping("/oauth/jwt/naver")
-    fun createNaverJwt(@RequestBody oauthData: Map<String?, Any?>): String? {
+    fun createNaverJwt(@RequestBody oauthData: Map<String?, Any?>): JwtDto? {
 
         println("oauthData : $oauthData")
 
@@ -153,7 +154,7 @@ internal class oAuthController (userRepository: UserRepository) {
             .withClaim("username", user.username)
             .sign(Algorithm.HMAC512(JwtProperties.SECRET))
 
-        return JwtProperties.TOKEN_PREFIX + jwtToken
+        return  JwtDto(redirectUrl = user.userNickname , authorization = JwtProperties.TOKEN_PREFIX + jwtToken)
     }
 
 

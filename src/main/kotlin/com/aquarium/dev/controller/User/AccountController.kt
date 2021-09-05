@@ -8,6 +8,7 @@ import com.aquarium.dev.domain.repository.UserRepository
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
 
@@ -60,6 +61,22 @@ internal class accountController (userRepository: UserRepository) {
 
         return responseAuth
     }
+
+    @GetMapping("/auth-userpage")
+    fun authUserPage( @RequestParam  userNickname : String ): ResponseEntity<Any> {
+
+        println(userNickname)
+
+        val user : User? = userRepository.findByUserNickname(userNickname)
+
+        if(user == null){
+            return ResponseEntity.notFound().build()
+
+        }else{
+            return ResponseEntity.ok().build()
+        }
+    }
+
 
     @PostMapping("/join")
     fun join( @RequestBody  user : User): String? {

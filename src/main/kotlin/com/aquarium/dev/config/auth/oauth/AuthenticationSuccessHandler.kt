@@ -33,7 +33,6 @@ class AuthenticationSuccessHandler( authenticationManager : AuthenticationManage
             .withClaim("username", principalDetailis.username)
             .sign(Algorithm.HMAC512(JwtProperties.SECRET))
 
-
         //응답 처리 (in header)
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken)  // 추후에 " "으로 분리 시킬 것임 공백이 필요
         redirectStrategy.sendRedirect(request,response,"/token")

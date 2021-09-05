@@ -1,6 +1,7 @@
 package com.aquarium.dev.config.jwt
 
 import com.aquarium.dev.config.auth.PrincipalDetails
+import com.aquarium.dev.domain.dto.JwtDto
 import com.aquarium.dev.domain.entity.User.User
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -61,7 +62,7 @@ class JwtAuthenticationFilter( authenticationManager : AuthenticationManager ) :
 
         //응답 처리 (in header)
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken)  // 추후에 " "으로 분리 시킬 것임 공백이 필요
-
+        response.addHeader("redirectUrl", principalDetailis.getUserNickname())  // 추후에 " "으로 분리 시킬 것임 공백이 필요
     }
 
     init {
