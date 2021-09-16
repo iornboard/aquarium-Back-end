@@ -11,12 +11,6 @@ import com.aquarium.dev.domain.repository.ChatMessageRepository
 import com.aquarium.dev.domain.repository.ChatRoomRepository
 import com.aquarium.dev.domain.repository.UserRepository
 import org.springframework.web.bind.annotation.*
-import org.springframework.messaging.handler.annotation.MessageMapping
-import org.springframework.web.bind.annotation.RequestMapping
-
-
-
-
 
 @RestController
 @RequestMapping("/api")
@@ -26,10 +20,8 @@ class ChatController( userRepository : UserRepository , chatRoomRepository : Cha
     private val chatRoomRepository : ChatRoomRepository
     private val chatMessageRepository : ChatMessageRepository
 
-
-
-    @MessageMapping("/chatting")
-    fun sendMessage( chatMessageDto : ChatMessageDto ) {
+    @PostMapping("/create-chat")
+    fun createChat( @RequestBody chatMessageDto : ChatMessageDto ): String? {
 
         val chatUser : User = userRepository.getOne(chatMessageDto.author.id)
         val chatRoom : ChatRoom = chatRoomRepository.getOne(chatMessageDto.roomId)
@@ -38,17 +30,17 @@ class ChatController( userRepository : UserRepository , chatRoomRepository : Cha
 
         chatMessageRepository.save(userChatMessage)
 
+        return "redirect:/api/"
+
     }
 
-    @RequestMapping("/chat")
-    fun getChattingHistory( @RequestParam roomId : Int ):  List<ChatMessageDto?>? {
+    @GetMapping("/chat")
+    fun readChat(@RequestParam roomId : Int) : List<ChatMessageDto?> {
 
         val messages = chatMessageRepository.findAllByRoom_RoomId(roomId)
         println(messages)
         return messages.map{  it?.toChatMessageDto()  }
     }
-
-
 
     @GetMapping("/update-chat")
     fun updateChat() {
@@ -68,5 +60,6 @@ class ChatController( userRepository : UserRepository , chatRoomRepository : Cha
         this.userRepository  = userRepository
         this.chatRoomRepository = chatRoomRepository
     }
+
 
 }

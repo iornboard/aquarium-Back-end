@@ -36,7 +36,6 @@ data class ChatMessage(
     @JsonIgnore
     var updatedAt : LocalDateTime? = LocalDateTime.now(),
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
     @JsonManagedReference

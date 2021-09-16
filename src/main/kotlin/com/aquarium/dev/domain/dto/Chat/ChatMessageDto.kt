@@ -20,6 +20,7 @@ data class ChatMessageDto(
     var type  : String? = null,
     var hasError: Boolean? = false
 
+
 ) {
     fun toChatMessage(user : User , room : ChatRoom) : ChatMessage {
         return ChatMessage(
