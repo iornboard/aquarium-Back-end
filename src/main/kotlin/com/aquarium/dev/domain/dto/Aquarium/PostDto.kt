@@ -1,6 +1,6 @@
-package com.aquarium.dev.domain.dto.Community
+package com.aquarium.dev.domain.dto.Aquarium
 
-import com.aquarium.dev.domain.entity.Community.Post
+import com.aquarium.dev.domain.entity.Aquarium.Post
 import com.aquarium.dev.domain.entity.User.User
 import java.time.LocalDateTime
 

@@ -1,14 +1,8 @@
 package com.aquarium.dev.domain.dto.Project
 
-import com.aquarium.dev.domain.entity.Chat.ChatRoom
-import com.aquarium.dev.domain.entity.Community.Post
 import com.aquarium.dev.domain.entity.Project.Task
 import com.aquarium.dev.domain.entity.User.User
-import com.fasterxml.jackson.annotation.JsonIgnore
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedBy
 import java.time.LocalDateTime
-import javax.persistence.*
 
 data class TaskDto(
 

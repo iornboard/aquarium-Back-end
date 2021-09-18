@@ -1,7 +1,7 @@
-package com.aquarium.dev.domain.entity.Community
+package com.aquarium.dev.domain.entity.Aquarium
 
 
-import com.aquarium.dev.domain.dto.Community.PostDto
+import com.aquarium.dev.domain.dto.Aquarium.PostDto
 import com.aquarium.dev.domain.entity.User.User
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference

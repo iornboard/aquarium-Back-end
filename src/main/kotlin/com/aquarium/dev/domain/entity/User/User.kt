@@ -2,9 +2,6 @@ package com.aquarium.dev.domain.entity.User
 
 
 import com.aquarium.dev.domain.dto.User.UserDto
-import com.aquarium.dev.domain.entity.Chat.ChatRoom
-import com.aquarium.dev.domain.entity.Community.Post
-import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedBy

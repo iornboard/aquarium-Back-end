@@ -1,7 +1,7 @@
 package com.aquarium.dev.controller.project
 
-import com.aquarium.dev.domain.dto.Community.PostDto
-import com.aquarium.dev.domain.entity.Community.Post
+import com.aquarium.dev.domain.dto.Aquarium.PostDto
+import com.aquarium.dev.domain.entity.Aquarium.Post
 import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.PostRepository
 import com.aquarium.dev.domain.repository.UserRepository

@@ -1,11 +1,7 @@
 package com.aquarium.dev.controller.chat
 
-import com.aquarium.dev.domain.dto.Chat.AuthorDto
 import com.aquarium.dev.domain.dto.Chat.ChatMessageDto
-import com.aquarium.dev.domain.dto.Community.PostDto
-import com.aquarium.dev.domain.entity.Chat.ChatMessage
 import com.aquarium.dev.domain.entity.Chat.ChatRoom
-import com.aquarium.dev.domain.entity.Community.Comment
 import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.ChatMessageRepository
 import com.aquarium.dev.domain.repository.ChatRoomRepository
