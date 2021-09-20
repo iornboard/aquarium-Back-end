@@ -8,8 +8,9 @@ import com.aquarium.dev.domain.repository.ChatRoomRepository
 import com.aquarium.dev.domain.repository.UserRepository
 import org.springframework.web.bind.annotation.*
 import org.springframework.messaging.handler.annotation.MessageMapping
+import org.springframework.messaging.handler.annotation.SendTo
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
-
 
 
 
@@ -24,8 +25,9 @@ class ChatController( userRepository : UserRepository , chatRoomRepository : Cha
 
 
 
-    @MessageMapping("/chatting")
-    fun sendMessage( chatMessageDto : ChatMessageDto ) {
+    @MessageMapping("/chat")
+    @SendTo("/back/chat")
+    fun sendMessage( chatMessageDto : ChatMessageDto ) : ChatMessageDto?{
 
         val chatUser : User = userRepository.getOne(chatMessageDto.author.id)
         val chatRoom : ChatRoom = chatRoomRepository.getOne(chatMessageDto.roomId)
@@ -34,13 +36,15 @@ class ChatController( userRepository : UserRepository , chatRoomRepository : Cha
 
         chatMessageRepository.save(userChatMessage)
 
+        return userChatMessage.toChatMessageDto()
     }
 
-    @RequestMapping("/chat")
+
+
+    @RequestMapping("/history")
     fun getChattingHistory( @RequestParam roomId : Int ):  List<ChatMessageDto?>? {
 
         val messages = chatMessageRepository.findAllByRoom_RoomId(roomId)
-        println(messages)
         return messages.map{  it?.toChatMessageDto()  }
     }
 
