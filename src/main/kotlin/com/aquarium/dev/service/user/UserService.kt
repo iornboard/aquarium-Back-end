@@ -2,7 +2,7 @@ package com.aquarium.dev.service.user
 
 import com.aquarium.dev.domain.dto.User.UserDto
 import com.aquarium.dev.domain.entity.User.User
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

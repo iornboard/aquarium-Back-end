@@ -1,5 +1,6 @@
 package com.aquarium.dev.domain.entity.Aquarium
 
+import com.aquarium.dev.domain.dto.Aquarium.MentionDto
 import com.aquarium.dev.domain.entity.User.User
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
@@ -43,5 +44,23 @@ data class Mention(
         @JsonManagedReference
         var aqrm : Aquarium
 
+) {
+        fun toMentionDto() : MentionDto {
+                return MentionDto(
+                        mentId = mentId,
+                        mentText = mentText,
+                        mentImgUrl = mentImgUrl,
+                        mentCommentCount = mentCommentCount,
+                        mentLikeCount = mentLikeCount,
+                        mentViewCount = mentViewCount,
+                        mentIsPrivate = mentIsPrivate,
+                        mentIsBlinded = mentIsBlinded,
+                        createdAt = createdAt,
+                        updatedAt = updatedAt,
 
-)
+                        userId = user.userId,
+                        aqrmId = aqrm.aqrmId
+                )
+        }
+
+}

@@ -1,6 +1,6 @@
-package com.aquarium.dev.controller
+package com.aquarium.dev.controller._Ect
 
-import com.aquarium.dev.domain.dto.FileDto
+import com.aquarium.dev.domain.dto._Ect.FileDto
 import com.aquarium.dev.storage.FileStorage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping
 
 @RestController
 @RequestMapping("/api")
-class fileController {
+class FileController {
 
     @Autowired
     lateinit var fileStorage: FileStorage

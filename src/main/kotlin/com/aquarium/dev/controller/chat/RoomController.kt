@@ -1,11 +1,10 @@
 package com.aquarium.dev.controller.chat
 
-import com.aquarium.dev.domain.dto.Chat.ChatMessageDto
 import com.aquarium.dev.domain.entity.Chat.ChatRoom
 import com.aquarium.dev.domain.entity.User.User
-import com.aquarium.dev.domain.repository.ChatMessageRepository
-import com.aquarium.dev.domain.repository.ChatRoomRepository
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.Chat.ChatMessageRepository
+import com.aquarium.dev.domain.repository.Chat.ChatRoomRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController

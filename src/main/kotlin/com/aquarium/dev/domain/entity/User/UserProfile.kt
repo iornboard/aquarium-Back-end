@@ -30,22 +30,4 @@ data class UserProfile (
         @JsonIgnore
         var updatedAt : LocalDateTime? = LocalDateTime.now()
 
-){
-      fun toUserProfile() : UserProfileDto {
-
-              return UserProfileDto(
-                      Id = Id,
-                      userId = userId,
-
-                      profileBirthday = profileBirthday,
-                      profileGender  = profileGender,
-                      profileJob  = profileJob,
-                      profileLocation  = profileLocation,
-                      profilePageImgUrl  = profilePageImgUrl,
-                      profileUserInfo  = profileUserInfo,
-
-                      createdAt = createdAt,
-                      updatedAt = updatedAt
-              )
-      }
-}
+)

@@ -3,13 +3,12 @@ package com.aquarium.dev.controller.chat
 import com.aquarium.dev.domain.dto.Chat.ChatMessageDto
 import com.aquarium.dev.domain.entity.Chat.ChatRoom
 import com.aquarium.dev.domain.entity.User.User
-import com.aquarium.dev.domain.repository.ChatMessageRepository
-import com.aquarium.dev.domain.repository.ChatRoomRepository
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.Chat.ChatMessageRepository
+import com.aquarium.dev.domain.repository.Chat.ChatRoomRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import org.springframework.web.bind.annotation.*
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 
 
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 @RestController
 @RequestMapping("/api")
-class ChatController( userRepository : UserRepository , chatRoomRepository : ChatRoomRepository , chatMessageRepository : ChatMessageRepository ) {
+class ChatController(userRepository : UserRepository, chatRoomRepository : ChatRoomRepository, chatMessageRepository : ChatMessageRepository) {
 
     private val userRepository : UserRepository
     private val chatRoomRepository : ChatRoomRepository

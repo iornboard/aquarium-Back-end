@@ -14,12 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.web.filter.CorsFilter
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import org.springframework.web.cors.CorsConfiguration
-import org.springframework.security.web.authentication.logout.LogoutFilter
-
-
-
 
 
 @Configuration

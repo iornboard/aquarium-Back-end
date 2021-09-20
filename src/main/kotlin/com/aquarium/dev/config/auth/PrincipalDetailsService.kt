@@ -1,7 +1,7 @@
 package com.aquarium.dev.config.auth
 
 import com.aquarium.dev.domain.entity.User.User
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService

@@ -1,13 +1,11 @@
 package com.aquarium.dev.service.project
 
-import com.aquarium.dev.domain.dto.Project.TaskDto
-import com.aquarium.dev.domain.entity.Project.Task
-import com.aquarium.dev.domain.repository.TaskRepository
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.Project.TaskRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class TaskService( userRepository: UserRepository, taskRepository: TaskRepository ) {
+class TaskService(userRepository: UserRepository, taskRepository: TaskRepository) {
 
 //    //C
 //    fun taskCreate(taskDto: TaskDto): Task?{

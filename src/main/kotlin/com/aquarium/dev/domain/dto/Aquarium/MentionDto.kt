@@ -1,5 +1,8 @@
 package com.aquarium.dev.domain.dto.Aquarium
 
+import com.aquarium.dev.domain.entity.Aquarium.Aquarium
+import com.aquarium.dev.domain.entity.Aquarium.Mention
+import com.aquarium.dev.domain.entity.User.User
 import java.time.LocalDateTime
 
 data class MentionDto (
@@ -22,4 +25,22 @@ data class MentionDto (
     var userId : Int = 0,
     var aqrmId : Int = 0
 
-)
+) {
+    fun toMention( user : User, aqrm : Aquarium ) : Mention {
+        return Mention(
+            mentId = mentId,
+            mentText = mentText,
+            mentImgUrl = mentImgUrl,
+            mentCommentCount = mentCommentCount,
+            mentLikeCount = mentLikeCount,
+            mentViewCount = mentViewCount,
+            mentIsPrivate = mentIsPrivate,
+            mentIsBlinded = mentIsBlinded,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+
+            user = user,
+            aqrm = aqrm
+        )
+    }
+}

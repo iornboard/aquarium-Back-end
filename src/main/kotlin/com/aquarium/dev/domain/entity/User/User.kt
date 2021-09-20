@@ -31,6 +31,7 @@ data class User (
     var userIsAgree : Boolean = false,
 
     var userLastAccess : LocalDateTime? =null,
+
     @CreatedDate
     @JsonIgnore
     var createdAt : LocalDateTime? = LocalDateTime.now(),

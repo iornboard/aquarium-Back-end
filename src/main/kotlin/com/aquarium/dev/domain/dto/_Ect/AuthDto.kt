@@ -1,4 +1,4 @@
-package com.aquarium.dev.domain.dto
+package com.aquarium.dev.domain.dto._Ect
 
 data class AuthDto(
 

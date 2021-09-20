@@ -1,4 +1,4 @@
-package com.aquarium.dev.domain.repository
+package com.aquarium.dev.domain.repository.Chat
 
 import com.aquarium.dev.domain.entity.Chat.ChatMessage
 import org.springframework.data.jpa.repository.JpaRepository

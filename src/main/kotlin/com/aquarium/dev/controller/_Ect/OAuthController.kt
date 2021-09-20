@@ -1,16 +1,14 @@
-package com.aquarium.dev.controller
+package com.aquarium.dev.controller._Ect
 
 
-import com.aquarium.dev.config.auth.PrincipalDetails
 import com.aquarium.dev.config.auth.oauth.provider.FacebookUserInfo
 import com.aquarium.dev.config.auth.oauth.provider.GoogleUserInfo
 import com.aquarium.dev.config.auth.oauth.provider.NaverUserInfo
 import com.aquarium.dev.config.auth.oauth.provider.OAuth2UserInfo
 import com.aquarium.dev.config.jwt.JwtProperties
-import com.aquarium.dev.domain.dto.AuthDto
-import com.aquarium.dev.domain.dto.JwtDto
+import com.aquarium.dev.domain.dto._Ect.JwtDto
 import com.aquarium.dev.domain.entity.User.User
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,7 +23,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/api")
-internal class oAuthController (userRepository: UserRepository) {
+internal class OAuthController (userRepository: UserRepository) {
 
     @Autowired
     private val userRepository: UserRepository

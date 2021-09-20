@@ -1,6 +1,6 @@
-package com.aquarium.dev.controller
+package com.aquarium.dev.controller._Ect
 
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import org.springframework.web.bind.annotation.*
 
 

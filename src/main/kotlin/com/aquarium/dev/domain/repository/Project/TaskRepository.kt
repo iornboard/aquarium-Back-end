@@ -1,4 +1,4 @@
-package com.aquarium.dev.domain.repository
+package com.aquarium.dev.domain.repository.Project
 
 import com.aquarium.dev.domain.entity.Chat.ChatMessage
 import com.aquarium.dev.domain.entity.Project.Task

@@ -4,14 +4,14 @@ import com.aquarium.dev.domain.dto.Project.TaskDto
 import com.aquarium.dev.domain.entity.Chat.ChatRoom
 import com.aquarium.dev.domain.entity.Project.Task
 import com.aquarium.dev.domain.entity.User.User
-import com.aquarium.dev.domain.repository.ChatRoomRepository
-import com.aquarium.dev.domain.repository.TaskRepository
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.Chat.ChatRoomRepository
+import com.aquarium.dev.domain.repository.Project.TaskRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-class TaskController(userRepository : UserRepository , taskRepository : TaskRepository , chatRoomRepository : ChatRoomRepository) {
+class TaskController(userRepository : UserRepository, taskRepository : TaskRepository, chatRoomRepository : ChatRoomRepository) {
 
     private val userRepository : UserRepository
     private val taskRepository : TaskRepository

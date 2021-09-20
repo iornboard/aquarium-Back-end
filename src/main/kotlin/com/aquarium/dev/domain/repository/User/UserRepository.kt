@@ -1,4 +1,4 @@
-package com.aquarium.dev.domain.repository
+package com.aquarium.dev.domain.repository.User
 
 import com.aquarium.dev.domain.entity.User.User
 import org.springframework.data.jpa.repository.JpaRepository

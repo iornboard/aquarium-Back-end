@@ -1,5 +1,9 @@
 package com.aquarium.dev.domain.dto.Aquarium
 
+import com.aquarium.dev.domain.entity.Aquarium.Aquarium
+import com.aquarium.dev.domain.entity.Aquarium.Comment
+import com.aquarium.dev.domain.entity.Aquarium.Mention
+import com.aquarium.dev.domain.entity.User.User
 import java.time.LocalDateTime
 
 data class CommentDto (
@@ -20,4 +24,21 @@ data class CommentDto (
     var aqrmId : Int = 0,
     var mentId : Int = 0
 
-)
+) {
+    fun toCommen(user : User, aqrm : Aquarium, ment : Mention) : Comment {
+        return Comment(
+            commentId = commentId,
+            commentText = commentText,
+            commentLikeCount = commentLikeCount,
+            commentIsPrivate = commentIsPrivate,
+            commentIsBlinded = commentIsBlinded,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+
+            user = user,
+            aqrm = aqrm,
+            ment = ment
+        )
+    }
+
+}

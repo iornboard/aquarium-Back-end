@@ -1,5 +1,6 @@
 package com.aquarium.dev.domain.entity.Aquarium
 
+import com.aquarium.dev.domain.dto.Aquarium.CommentDto
 import com.aquarium.dev.domain.entity.User.User
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
@@ -46,5 +47,21 @@ data class Comment(
     @JsonManagedReference
     var ment : Mention
 
+) {
+    fun toCommentDto() : CommentDto {
+        return CommentDto(
+            commentId = commentId,
+            commentText = commentText,
+            commentLikeCount = commentLikeCount,
+            commentIsPrivate = commentIsPrivate,
+            commentIsBlinded = commentIsBlinded,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
 
-)
+            userId = user.userId,
+            aqrmId = aqrm.aqrmId,
+            mentId = ment.mentId
+        )
+    }
+
+}

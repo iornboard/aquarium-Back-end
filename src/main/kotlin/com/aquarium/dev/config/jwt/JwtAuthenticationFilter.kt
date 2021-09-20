@@ -1,7 +1,6 @@
 package com.aquarium.dev.config.jwt
 
 import com.aquarium.dev.config.auth.PrincipalDetails
-import com.aquarium.dev.domain.dto.JwtDto
 import com.aquarium.dev.domain.entity.User.User
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken

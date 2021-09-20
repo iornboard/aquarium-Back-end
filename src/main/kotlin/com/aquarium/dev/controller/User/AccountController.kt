@@ -2,9 +2,9 @@ package com.aquarium.dev.controller.User
 
 
 import com.aquarium.dev.config.jwt.JwtProperties
-import com.aquarium.dev.domain.dto.AuthDto
+import com.aquarium.dev.domain.dto._Ect.AuthDto
 import com.aquarium.dev.domain.entity.User.User
-import com.aquarium.dev.domain.repository.UserRepository
+import com.aquarium.dev.domain.repository.User.UserRepository
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping
 
 @RestController
 @RequestMapping("/api")
-internal class accountController (userRepository: UserRepository) {
+internal class AccountController (userRepository: UserRepository) {
 
     @Autowired
     private val userRepository: UserRepository
