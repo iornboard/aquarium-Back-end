@@ -11,25 +11,25 @@ class SampleApiController(userRepository : UserRepository) {
     private val userRepository : UserRepository
 
     @PostMapping("/create-Sample")
-    fun createProject( @RequestBody body : String) {
+    fun create( @RequestBody body : String) {
 
     }
 
 
     @GetMapping("/Sample")
-    fun readProject(@RequestParam param: String)  {
+    fun read(@RequestParam param: String)  {
 
     }
 
 
     @GetMapping("/update-Sample")
-    fun updateProject() {
+    fun update() {
 
     }
 
 
     @GetMapping("/delete-Sample")
-    fun deleteProject() {
+    fun delete() {
 
     }
 

@@ -48,8 +48,6 @@ data class User (
 
         return User().apply {
             this.userId =  userDto.userId
-            this.username =  userDto.username
-            this.password = userDto.password
 
             this.userEmail = userDto.userEmail
             this.userFullname = userDto.userFullname
@@ -69,7 +67,6 @@ data class User (
             this.updatedAt = userDto.updatedAt
 
             this.provider = userDto.provider
-            this.providerId = userDto.providerId
         }
     }
 }

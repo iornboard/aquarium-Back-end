@@ -6,7 +6,7 @@ import java.nio.file.Path
 import java.util.stream.Stream
 
 interface FileStorage {
-    fun save(file: MultipartFile)
+    fun save(file: MultipartFile, filename: String)
     fun loadFile(filename: String): Resource
     fun deleteAll()
     fun init()

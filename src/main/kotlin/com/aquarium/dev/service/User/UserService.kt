@@ -1,4 +1,4 @@
-package com.aquarium.dev.service.user
+package com.aquarium.dev.service.User
 
 import com.aquarium.dev.domain.dto.User.UserDto
 import com.aquarium.dev.domain.entity.User.User

@@ -5,8 +5,6 @@ import java.time.LocalDateTime
 
 data class UserDto (
     var userId : Int = 0,
-    var username : String? = null,
-    var password : String? = null,
 
     var userEmail : String? = null,
     var userFullname : String? = null,
@@ -25,8 +23,7 @@ data class UserDto (
     var createdAt : LocalDateTime? = LocalDateTime.now(),
     var updatedAt : LocalDateTime? = LocalDateTime.now(),
 
-    var provider : String? = null,  // 소셜 회원가입 정보 -> google, naver등
-    var providerId : String? = null  // 소셜 회원가입 ID(숫자로 되어 있는 것)
+    var provider : String? = null  // 소셜 회원가입 정보 -> google, naver등
 
 ) {
 
@@ -34,8 +31,6 @@ data class UserDto (
 
         return UserDto().apply {
             this.userId = user.userId
-            this.username = user.username
-            this.password = user.password
 
             this.userEmail = user.userEmail
             this.userFullname = user.userFullname
@@ -55,7 +50,6 @@ data class UserDto (
             this.updatedAt = user.updatedAt
 
             this.provider = user.provider
-            this.providerId = user.providerId
         }
     }
 }

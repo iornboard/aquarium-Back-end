@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import java.io.IOException
+import java.util.UUID
 
 import javax.servlet.http.HttpServletRequest
 
@@ -31,17 +32,20 @@ class FileController {
 
     @PostMapping("/image")
     fun uploadMultipartFile(@RequestParam("img") file: MultipartFile):ResponseEntity<FileDto> {
-        fileStorage.save(file)
+
+        val newFileName = UUID.randomUUID().toString() +"_" + file.originalFilename.toString()
+
+        fileStorage.save(file, newFileName)
 
         val fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
             .path("/api/file/")
-            .path(file.originalFilename.toString())
+            .path(newFileName)
             .toUriString()
 
         println("fileDownloadUri : $fileDownloadUri")
 
         val fileResponse = FileDto()
-        fileResponse.filename =  file.originalFilename.toString()
+        fileResponse.filename =  newFileName
         fileResponse.fileDownloadUri = fileDownloadUri
         fileResponse.fileType = file.contentType
         fileResponse.size = file.size

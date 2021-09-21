@@ -1,6 +1,8 @@
 package com.aquarium.dev.domain.entity.Aquarium
 
 import com.aquarium.dev.domain.dto.Aquarium.MentionDto
+import com.aquarium.dev.domain.dto.Aquarium.MentionMakerDto
+import com.aquarium.dev.domain.dto.User.UserDto
 import com.aquarium.dev.domain.entity.User.User
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
@@ -22,6 +24,11 @@ data class Mention(
         var mentCommentCount : Int = 0,
         var mentLikeCount : Int = 0,
         var mentViewCount : Int = 0,
+
+        var xPosition : Int = 0,
+        var yPosition : Int = 0,
+        var startTime : Int = 0,
+        var endTime : Int = 0,
 
         var mentIsPrivate : Boolean = false,
         var mentIsBlinded : Boolean = false,
@@ -53,13 +60,41 @@ data class Mention(
                         mentCommentCount = mentCommentCount,
                         mentLikeCount = mentLikeCount,
                         mentViewCount = mentViewCount,
+
+                        x = xPosition,
+                        y = yPosition,
+                        start = startTime,
+                        end = endTime,
+
                         mentIsPrivate = mentIsPrivate,
                         mentIsBlinded = mentIsBlinded,
                         createdAt = createdAt,
                         updatedAt = updatedAt,
 
                         userId = user.userId,
-                        aqrmId = aqrm.aqrmId
+                        aqrmId = aqrm.aqrmId,
+
+                        userInfo = UserDto().toUserDto(user)
+                )
+        }
+
+        fun toMentMaker() : MentionMakerDto {
+                return MentionMakerDto(
+                        mentId = mentId,
+                        mentText = mentText,
+
+                        x = xPosition,
+                        y = yPosition,
+                        start = startTime,
+                        end = endTime,
+
+                        avatarImg = user.userImgUrl,
+
+                        mentIsPrivate = mentIsPrivate,
+                        mentIsBlinded = mentIsBlinded,
+                        createdAt = createdAt,
+                        updatedAt = updatedAt
+
                 )
         }
 

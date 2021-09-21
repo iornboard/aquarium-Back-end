@@ -1,4 +1,4 @@
-package com.aquarium.dev.service.project
+package com.aquarium.dev.service.Project
 
 import com.aquarium.dev.domain.repository.Project.TaskRepository
 import com.aquarium.dev.domain.repository.User.UserRepository

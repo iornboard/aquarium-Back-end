@@ -18,8 +18,8 @@ class FileStorageService: FileStorage{
 
     val rootLocation = Paths.get("C:\\Users\\KUCK_SU\\Documents\\project-aquarium\\aquarium-Back-end\\src\\main\\kotlin\\com\\aquarium\\dev\\storage")
 
-    override fun save(file: MultipartFile){
-        Files.copy(file.getInputStream(), this.rootLocation.resolve(file.originalFilename.toString()))
+    override fun save(file: MultipartFile, filename: String){
+        Files.copy(file.getInputStream(), this.rootLocation.resolve(filename))
     }
 
     override fun loadFile(filename: String): Resource{
