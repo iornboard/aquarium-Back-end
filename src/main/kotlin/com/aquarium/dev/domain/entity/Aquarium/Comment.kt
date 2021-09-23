@@ -1,6 +1,7 @@
 package com.aquarium.dev.domain.entity.Aquarium
 
 import com.aquarium.dev.domain.dto.Aquarium.CommentDto
+import com.aquarium.dev.domain.dto.User.UserDto
 import com.aquarium.dev.domain.entity.User.User
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
@@ -60,7 +61,25 @@ data class Comment(
 
             userId = user.userId,
             aqrmId = aqrm.aqrmId,
-            mentId = ment.mentId
+            mentId = ment.mentId,
+
+            userInfo = UserDto().toUserDto(user) // 기본으로 추가
+        )
+    }
+
+    fun toJoinedCommentDto() : CommentDto {
+        return CommentDto(
+            commentId = commentId,
+            commentText = commentText,
+            commentLikeCount = commentLikeCount,
+            commentIsPrivate = commentIsPrivate,
+            commentIsBlinded = commentIsBlinded,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+
+            userInfo = UserDto().toUserDto(user),
+            aqrmInfo = aqrm.toAquariumDto(),
+            mentInfo = ment.toMentionDto()
         )
     }
 

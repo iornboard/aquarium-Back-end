@@ -1,5 +1,6 @@
 package com.aquarium.dev.domain.dto.Aquarium
 
+import com.aquarium.dev.domain.dto.User.UserDto
 import com.aquarium.dev.domain.entity.Aquarium.Aquarium
 import com.aquarium.dev.domain.entity.Aquarium.Comment
 import com.aquarium.dev.domain.entity.Aquarium.Mention
@@ -20,12 +21,16 @@ data class CommentDto (
     var createdAt : LocalDateTime? = LocalDateTime.now(),
     var updatedAt : LocalDateTime? = LocalDateTime.now(),
 
-    var userId : Int = 0,
-    var aqrmId : Int = 0,
-    var mentId : Int = 0
+    var userId : Int? = null,
+    var aqrmId : Int? = null,
+    var mentId : Int? = null,
+
+    var userInfo : UserDto? = null,
+    var aqrmInfo : AquariumDto? = null,
+    var mentInfo : MentionDto? = null
 
 ) {
-    fun toCommen(user : User, aqrm : Aquarium, ment : Mention) : Comment {
+    fun toComment(user : User, aqrm : Aquarium, ment : Mention) : Comment {
         return Comment(
             commentId = commentId,
             commentText = commentText,

@@ -20,15 +20,14 @@ class MentionController(userRepository : UserRepository, aquariumRepository: Aqu
     @PostMapping("/create-ment")
     fun createMention( @RequestBody ment : MentionDto) : ResponseEntity<Any?> {
 
-        println(ment)
         val user = userRepository.findByIdOrNull(ment.userId)
 
         return user?.let{
             val aqrm = aquariumRepository.findByIdOrNull(ment.aqrmId)
 
             aqrm?. let{
-                val req = mentionRepository.save(ment.toMention(user,it)).toMentMaker()
-                return ResponseEntity.status(200).body(req)
+                val res = mentionRepository.save(ment.toMention(user,it)).toMentMaker()
+                return ResponseEntity.status(200).body(res)
             } ?: let {
                 return ResponseEntity.status(400).body("not found Aqrm!!")
             }
@@ -44,8 +43,6 @@ class MentionController(userRepository : UserRepository, aquariumRepository: Aqu
     fun readMention(@RequestParam mentId : Int) : ResponseEntity<Any?> {
 
         val ment = mentionRepository.findByIdOrNull(mentId)
-
-        println(ment)
 
         return ment?.let{
             return ResponseEntity.ok( it.toMentionDto() )

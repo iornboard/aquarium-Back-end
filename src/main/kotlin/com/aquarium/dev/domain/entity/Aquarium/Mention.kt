@@ -74,9 +74,35 @@ data class Mention(
                         userId = user.userId,
                         aqrmId = aqrm.aqrmId,
 
-                        userInfo = UserDto().toUserDto(user)
+                        userInfo = UserDto().toUserDto(user)  // 기본으로 추가
                 )
         }
+
+
+        fun toJoinedMentionDto() : MentionDto {
+                return MentionDto(
+                        mentId = mentId,
+                        mentText = mentText,
+                        mentImgUrl = mentImgUrl,
+                        mentCommentCount = mentCommentCount,
+                        mentLikeCount = mentLikeCount,
+                        mentViewCount = mentViewCount,
+
+                        x = xPosition,
+                        y = yPosition,
+                        start = startTime,
+                        end = endTime,
+
+                        mentIsPrivate = mentIsPrivate,
+                        mentIsBlinded = mentIsBlinded,
+                        createdAt = createdAt,
+                        updatedAt = updatedAt,
+
+                        userInfo = UserDto().toUserDto(user),
+                        aqrmInfo = aqrm.toAquariumDto()
+                )
+        }
+
 
         fun toMentMaker() : MentionMakerDto {
                 return MentionMakerDto(

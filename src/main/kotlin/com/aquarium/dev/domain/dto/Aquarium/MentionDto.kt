@@ -28,10 +28,11 @@ data class MentionDto (
     var createdAt : LocalDateTime? = null,
     var updatedAt : LocalDateTime? = null,
 
-    var userId : Int = 0,
-    var aqrmId : Int = 0,
+    var userId : Int? = null,
+    var aqrmId : Int? = null,
 
-    var userInfo : UserDto? = null
+    var userInfo : UserDto? = null,
+    var aqrmInfo : AquariumDto? = null
 
 ) {
     fun toMention( user : User, aqrm : Aquarium ) : Mention {

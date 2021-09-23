@@ -1,5 +1,6 @@
 package com.aquarium.dev.domain.dto.Aquarium
 
+import com.aquarium.dev.domain.dto.User.UserDto
 import com.aquarium.dev.domain.entity.Aquarium.Aquarium
 import com.aquarium.dev.domain.entity.User.User
 import java.time.LocalDateTime
@@ -23,7 +24,10 @@ data class AquariumDto (
     var createdAt : LocalDateTime? = null,
     var updatedAt : LocalDateTime? = null,
 
-    var userId : Int = 0
+    var userId : Int? = null,
+
+    var userInfo : UserDto? = null
+
     ) {
 
     fun toAquarium(user : User) : Aquarium {

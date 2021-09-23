@@ -1,6 +1,7 @@
 package com.aquarium.dev.domain.entity.Aquarium
 
 import com.aquarium.dev.domain.dto.Aquarium.AquariumDto
+import com.aquarium.dev.domain.dto.User.UserDto
 import com.aquarium.dev.domain.entity.User.User
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
@@ -60,6 +61,24 @@ data class Aquarium(
 
             userId = user.userId
         )
+    }
 
+    fun toJoinedAquariumDto() : AquariumDto {
+        return AquariumDto(
+            aqrmId = aqrmId,
+            aqrmTitle = aqrmTitle,
+            aqrmContentType = aqrmContentType,
+            aqrmImgUrl = aqrmImgUrl,
+            aqrmVideoUrl = aqrmVideoUrl,
+            aqrmMentionCount = aqrmMentionCount,
+            aqrmLikeCount = aqrmLikeCount,
+            aqrmViewCount = aqrmViewCount,
+            aqrmIsPrivate = aqrmIsPrivate,
+            aqrmIsBlinded = aqrmIsBlinded,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+
+            userInfo = UserDto().toUserDto(user)
+        )
     }
 }
