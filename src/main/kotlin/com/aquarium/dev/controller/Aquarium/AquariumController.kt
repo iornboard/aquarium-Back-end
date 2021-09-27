@@ -49,7 +49,7 @@ class AquariumController(userRepository : UserRepository, aquariumRepository: Aq
         val user = userRepository.findByIdOrNull(userId)
 
         return user?.let{
-            return aquariumRepository.findAllByUser(it)?.let {
+            aquariumRepository.findAllByUser(it)?.let {
                 return ResponseEntity.ok( it.map{it.toAquariumDto()} )
 
             } ?: run {

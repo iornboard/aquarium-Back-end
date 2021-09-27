@@ -32,6 +32,8 @@ data class Task (
         var taskIsAccept : Boolean = false,
 
         var chatRoomId : Int? = null,
+        var aqrmId : Int? = null,
+        var masterId : Int? = null,
 
         @CreatedDate
         @JsonIgnore
@@ -42,35 +44,21 @@ data class Task (
         var updatedAt : LocalDateTime? = LocalDateTime.now(),
 
 
-
         @ManyToMany
         @JoinTable(
                 name = "task_assined",
                 joinColumns = [JoinColumn(name = "task_id" ,referencedColumnName = "task_id")],
-                inverseJoinColumns = [JoinColumn(name = "employee_id" ,referencedColumnName = "employee_id")]
+                inverseJoinColumns = [JoinColumn(name = "user_id" ,referencedColumnName = "user_id")]
         )
-//        @JsonIgnore
-        var employee : Set<User>,
-
-
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-        @JsonManagedReference
-        var master : User,
+        @JsonIgnore
+        var teams : Set<User>,
 
 
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "project_id", referencedColumnName = "project_id", nullable = false)
         @JsonManagedReference
-        var project: Project,
-
-
-
-        @OneToOne
-        @JoinColumn(name = "qurm_id", referencedColumnName = "qurm_id", nullable = false)
-        @JsonManagedReference
-       var aqrm : Aquarium
+        var project: Project
 
 
         )  {
@@ -78,23 +66,23 @@ data class Task (
         fun toTaskDto() : TaskDto {
                 return TaskDto(
                         taskId = taskId,
-                        taskName = taskName,
+                        title = taskName,
                         taskDescription = taskDescription,
                         taskStatus = taskStatus,
                         taskMemo = taskMemo,
-                        taskStartDate = taskStartDate,
-                        taskEndDate = taskEndDate,
+                        startDate = taskStartDate,
+                        endDate = taskEndDate,
                         taskIsWorking = taskIsWorking,
                         taskIsEnd = taskIsEnd,
                         taskIsAccept = taskIsAccept,
                         chatRoomId = chatRoomId,
+                        aqrmId = aqrmId,
+                        masterId =  masterId,
                         createdAt = createdAt,
                         updatedAt = updatedAt,
 
-                        employeeId = employee.map{it -> it.userId},
-                        masterId = master.userId,
-                        projectId = project.projectId,
-                        aqrmId = aqrm.aqrmId
+                        teamsInfo = teams.map{it -> UserDto().toUserDto(it)},
+                        projectId = project.projectId
 
                 )
         }
@@ -102,23 +90,23 @@ data class Task (
         fun toJoinedTaskDto() : TaskDto {
                 return TaskDto(
                         taskId = taskId,
-                        taskName = taskName,
+                        title = taskName,
                         taskDescription = taskDescription,
                         taskStatus = taskStatus,
                         taskMemo = taskMemo,
-                        taskStartDate = taskStartDate,
-                        taskEndDate = taskEndDate,
+                        startDate = taskStartDate,
+                        endDate = taskEndDate,
                         taskIsWorking = taskIsWorking,
                         taskIsEnd = taskIsEnd,
                         taskIsAccept = taskIsAccept,
                         chatRoomId = chatRoomId,
+                        aqrmId = aqrmId,
+                        masterId =  masterId,
                         createdAt = createdAt,
                         updatedAt = updatedAt,
 
-                        employeeInfo = employee.map{it -> UserDto().toUserDto(it)},
-                        masterInfo = UserDto().toUserDto(master),
-                        projectInfo = project.toProjectDto(),
-                        aqrmInfo = aqrm.toAquariumDto()
+                        teamsInfo = teams.map{it -> UserDto().toUserDto(it)},
+                        projectInfo = project.toProjectDto()
                 )
         }
 }

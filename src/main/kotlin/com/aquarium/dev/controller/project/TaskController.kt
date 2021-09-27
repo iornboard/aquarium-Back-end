@@ -4,46 +4,110 @@ import com.aquarium.dev.domain.dto.Project.TaskDto
 import com.aquarium.dev.domain.entity.Chat.ChatRoom
 import com.aquarium.dev.domain.entity.Project.Task
 import com.aquarium.dev.domain.entity.User.User
+import com.aquarium.dev.domain.repository.Aquarium.AquariumRepository
 import com.aquarium.dev.domain.repository.Chat.ChatRoomRepository
+import com.aquarium.dev.domain.repository.Project.ProjectRepository
 import com.aquarium.dev.domain.repository.Project.TaskRepository
 import com.aquarium.dev.domain.repository.User.UserRepository
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-class TaskController(userRepository : UserRepository, taskRepository : TaskRepository, chatRoomRepository : ChatRoomRepository) {
+class TaskController(userRepository : UserRepository, projectRepository: ProjectRepository ,taskRepository : TaskRepository) {
 
     private val userRepository : UserRepository
+    private val projectRepository: ProjectRepository
     private val taskRepository : TaskRepository
-    private val chatRoomRepository : ChatRoomRepository
-
 
     @PostMapping("/create-task")
-    fun createTask( @RequestBody taskDto : TaskDto ) {
+    fun createTask( @RequestBody task : TaskDto ) : ResponseEntity<Any?> {
 
-        // 가장 쉬운 방법
-        val taskUsers : Set<User> = taskDto.userIdList!!.map{ it -> userRepository.getOne(it) }.toSet()
-        val taskChatRoom : ChatRoom = chatRoomRepository.save(ChatRoom(user=taskUsers))
 
-        val task = taskDto.toTask(taskUsers)
-        task.chatRoomId = taskChatRoom.roomId
 
-        taskRepository.save(task)
+        task.teamsId?.let{
+            println("task!!!")
+            val teams = userRepository.findAllById(it).toSet() as Set<User>?
+
+
+            teams?. let{
+                val proj = projectRepository.findByIdOrNull(task.projectId)
+
+                proj?.let{
+                    val res = taskRepository.save(task.toTask(teams,proj)).toTaskDto()
+                    return ResponseEntity.status(200).body(res)
+                } ?: let{
+                    return ResponseEntity.status(400).body("not found Project!!")
+                }
+
+            } ?: let{
+                return ResponseEntity.status(400).body("not found User!!")
+            }
+
+        } ?: let{
+            return ResponseEntity.status(400).build()
+        }
+
     }
 
 
     @GetMapping("/task")
-    fun readTask(@RequestParam userId : Int) : MutableList<Task?> {
+    fun readTask(@RequestParam taskId : Int) : ResponseEntity<Any?> {
 
-        val RequestUser = userRepository.getOne(userId)
+        val task = taskRepository.findByIdOrNull(taskId)
 
-        return taskRepository.findAllByUser(RequestUser)
+        task?.let{
+            return ResponseEntity.ok(it.toTaskDto())
+        } ?: let{
+            return ResponseEntity.status(400).build()
+        }
 
     }
 
 
+    @GetMapping("/all-user-task")
+    fun readAllUserTask(@RequestParam userId : Int) : ResponseEntity<Any?>  {
+
+        val user = userRepository.findByIdOrNull(userId)
+
+        user?.let{
+            val tasks = taskRepository.findAllByTeams(it)
+
+            tasks?.let{
+                return ResponseEntity.ok(it.map{ it.toTaskDto()})
+            } ?: let{
+                return ResponseEntity.ok().body(null)
+            }
+
+        } ?: let{
+            return ResponseEntity.status(400).body("not found User!!")
+        }
+
+    }
+
+    @GetMapping("/all-project-task")
+    fun readAllProjectTask(@RequestParam projectId : Int) : ResponseEntity<Any?>  {
+
+        val proj = projectRepository.findByIdOrNull(projectId)
+
+        proj?.let{
+            val tasks = taskRepository.findAllByProject(it)
+
+            tasks?.let{
+                return ResponseEntity.ok(it.map{ it.toTaskDto()})
+            } ?: let{
+                return ResponseEntity.ok().body(null)
+            }
+
+        } ?: let{
+            return ResponseEntity.status(400).body("not found User!!")
+        }
+
+    }
+
     @PostMapping("/update-task")
-    fun updateTask( @RequestBody taskDto : TaskDto ) {
+    fun updateTask( @RequestBody task : TaskDto ) {
 
 
     }
@@ -54,21 +118,11 @@ class TaskController(userRepository : UserRepository, taskRepository : TaskRepos
 
     }
 
-    @PostMapping("/update-task-img")
-    fun updateTaskImg( @RequestBody taskDto : TaskDto ) : Task{
-
-        val patchTask = taskRepository.getOne(taskDto.taskId)
-
-        patchTask.taskImgUrl = taskDto.taskImgUrl
-        taskRepository.save(patchTask)
-
-        return patchTask
-    }
 
     init {
         this.userRepository  = userRepository
+        this.projectRepository = projectRepository
         this.taskRepository  = taskRepository
-        this.chatRoomRepository = chatRoomRepository
     }
 
 

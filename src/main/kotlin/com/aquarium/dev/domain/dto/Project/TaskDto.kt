@@ -13,50 +13,49 @@ import java.time.LocalDateTime
 data class TaskDto(
 
     var taskId : Int = 0,
-    var taskName : String? = null,
+    var title : String? = null,
     var taskDescription : String? = null,
     var taskStatus : String? = null,
     var taskMemo : String? = null,
-    var taskStartDate : LocalDateTime? =null,
-    var taskEndDate : LocalDateTime? =null,
+    var startDate : LocalDateTime? =null,
+    var endDate : LocalDateTime? =null,
     var taskIsWorking : Boolean = false,
     var taskIsEnd : Boolean = false,
     var taskIsAccept : Boolean = false,
     var chatRoomId : Int? = null,
+    var aqrmId : Int? = null,
+    var masterId : Int? = null,
     var createdAt : LocalDateTime? = LocalDateTime.now(),
     var updatedAt : LocalDateTime? = LocalDateTime.now(),
 
-    var employeeId : List<Int>? = null,
-    var masterId : Int? = null,
+    var teamsId : List<Int>? = null,
     var projectId : Int? = null,
-    var aqrmId : Int? = null,
 
-    var employeeInfo : List<UserDto>? = null,
-    var masterInfo : UserDto? = null,
-    var projectInfo: ProjectDto? = null,
-    var aqrmInfo : AquariumDto? = null
+    var teamsInfo : List<UserDto>? = null,
+    var projectInfo: ProjectDto? = null
 
 ) {
-     fun toTask(employee : Set<User>, master : User, project : Project, aqrm : Aquarium) : Task {
+     fun toTask(teams : Set<User>, project : Project) : Task {
          return Task(
              taskId = taskId,
-             taskName = taskName,
+             taskName = title,
              taskDescription = taskDescription,
              taskStatus = taskStatus,
              taskMemo = taskMemo,
-             taskStartDate = taskStartDate,
-             taskEndDate = taskEndDate,
+             taskStartDate = startDate,
+             taskEndDate = endDate,
              taskIsWorking = taskIsWorking,
              taskIsEnd = taskIsEnd,
              taskIsAccept = taskIsAccept,
              chatRoomId = chatRoomId,
+             aqrmId = aqrmId,
+             masterId =  masterId,
              createdAt = createdAt,
              updatedAt = updatedAt,
 
-             employee = employee,
-             master = master,
-             project = project,
-             aqrm = aqrm
+             teams = teams,
+             project = project
+
          )
      }
 }
