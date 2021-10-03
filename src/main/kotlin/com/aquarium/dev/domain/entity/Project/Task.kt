@@ -109,4 +109,28 @@ data class Task (
                         projectInfo = project.toProjectDto()
                 )
         }
+
+        fun mergeDto(taskInfo : TaskDto)  : Task {
+                return Task(
+                        taskId = taskInfo.taskId,
+                        taskName = taskInfo.title,
+                        taskDescription = taskInfo.taskDescription,
+                        taskStatus = taskInfo.taskStatus,
+                        taskMemo = taskInfo.taskMemo,
+                        taskStartDate = taskInfo.startDate,
+                        taskEndDate = taskInfo.endDate,
+                        taskIsWorking = taskInfo.taskIsWorking,
+                        taskIsEnd = taskInfo.taskIsEnd,
+                        taskIsAccept = taskInfo.taskIsAccept,
+                        chatRoomId = taskInfo.chatRoomId,
+                        aqrmId = taskInfo.aqrmId,
+                        masterId =  taskInfo.masterId,
+                        createdAt = taskInfo.createdAt,
+                        updatedAt = taskInfo.updatedAt,
+
+                        teams = teams,
+                        project = project
+                )
+        }
+
 }

@@ -24,10 +24,7 @@ class TaskController(userRepository : UserRepository, projectRepository: Project
     @PostMapping("/create-task")
     fun createTask( @RequestBody task : TaskDto ) : ResponseEntity<Any?> {
 
-
-
         task.teamsId?.let{
-            println("task!!!")
             val teams = userRepository.findAllById(it).toSet() as Set<User>?
 
 
@@ -106,16 +103,54 @@ class TaskController(userRepository : UserRepository, projectRepository: Project
 
     }
 
-    @PostMapping("/update-task")
-    fun updateTask( @RequestBody task : TaskDto ) {
+    @PutMapping("/update-task")
+    fun updateTask( @RequestBody newTask : TaskDto ) : ResponseEntity<Any?> {
 
+        newTask.teamsId?.let{
+            val teams = userRepository.findAllById(it).toSet() as Set<User>?
+
+
+            teams?. let{
+                val proj = projectRepository.findByIdOrNull(newTask.projectId)
+
+                proj?.let{
+                    val res = taskRepository.save(newTask.toTask(teams,proj)).toTaskDto()
+                    return ResponseEntity.status(200).body(res)
+                } ?: let{
+                    return ResponseEntity.status(400).body("not found Project!!")
+                }
+
+            } ?: let{
+                return ResponseEntity.status(400).body("not found User!!")
+            }
+
+        } ?: let{
+            return ResponseEntity.status(400).build()
+        }
 
     }
 
 
-    @GetMapping("/delete-task")
-    fun deleteTask() {
+    @PutMapping("/update-task-info")
+    fun updateTaskInfo( @RequestBody newTask : TaskDto ) : ResponseEntity<Any?> {
 
+        val oldTask = taskRepository.findByIdOrNull(newTask.taskId)
+
+        oldTask?.let{
+            val res = taskRepository.save(oldTask.mergeDto(newTask)).toTaskDto()
+            return ResponseEntity.status(200).body(res)
+        } ?: let{
+            return ResponseEntity.status(400).body("not found Task!!")
+        }
+
+    }
+
+    @DeleteMapping("/delete-task")
+    fun deleteTask( @RequestParam taskId : Int ): ResponseEntity<Any?>  {
+
+        taskRepository.deleteById(taskId).let{ it ->
+            return ResponseEntity.status(200).body(it)
+        }
     }
 
 
