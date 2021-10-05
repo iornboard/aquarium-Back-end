@@ -70,7 +70,7 @@ internal class AccountController (userRepository: UserRepository) {
         val user : User? = userRepository.findByUserNickname(userNickname)
 
         if(user == null){
-            return ResponseEntity.notFound().build()
+            return ResponseEntity.ok("/")
 
         }else{
             return ResponseEntity.ok().build()
