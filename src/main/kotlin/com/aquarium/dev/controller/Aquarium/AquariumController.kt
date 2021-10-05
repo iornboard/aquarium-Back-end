@@ -22,8 +22,8 @@ class AquariumController(userRepository : UserRepository, aquariumRepository: Aq
         val user = userRepository.findByIdOrNull(aqrm.userId)
 
         return user?.let {
-            aquariumRepository.save(aqrm.toAquarium(it))
-            return ResponseEntity.status(200).build()
+            var res = aquariumRepository.save(aqrm.toAquarium(it))
+            return ResponseEntity.ok(res)
         } ?: let {
             return ResponseEntity.status(400).build()
         }
