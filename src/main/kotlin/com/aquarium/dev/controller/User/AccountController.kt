@@ -2,6 +2,7 @@ package com.aquarium.dev.controller.User
 
 
 import com.aquarium.dev.config.jwt.JwtProperties
+import com.aquarium.dev.domain.dto.User.UserDto
 import com.aquarium.dev.domain.dto._Ect.AuthDto
 import com.aquarium.dev.domain.entity.User.User
 import com.aquarium.dev.domain.repository.User.UserRepository
@@ -70,10 +71,10 @@ internal class AccountController (userRepository: UserRepository) {
         val user : User? = userRepository.findByUserNickname(userNickname)
 
         if(user == null){
-            return ResponseEntity.ok("/")
+            return ResponseEntity.ok().body(null)
 
         }else{
-            return ResponseEntity.ok().build()
+            return ResponseEntity.ok(UserDto().toUserDto(user))
         }
     }
 
